@@ -1,0 +1,14 @@
+{
+    "@attributes": {
+        "count": "1",
+        "offset": "0",
+        "limit": "100"
+    },
+    "EmployeeHours": {
+            "employeeHoursID": "4663",
+            "checkIn": "2021-02-26T18:10:19+00:00",
+            "checkOut": "2021-02-26T19:06:21+00:00",
+            "employeeID": "63",
+            "shopID": "2"
+    }
+}

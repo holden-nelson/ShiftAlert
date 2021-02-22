@@ -1,0 +1,10 @@
+django
+gunicorn
+django-heroku
+django-environ
+psycopg2
+whitenoise
+requests
+django-invitations
+django-allauth
+django-timezone-field

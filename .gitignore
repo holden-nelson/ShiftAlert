@@ -1,0 +1,9 @@
+.idea/
+.python-version
+services.txt
+.envrc
+webapp.txt
+__pycache__
+*.sqlite3
+.DS_STORE
+wrapper.txt

@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block title %}Invite employees{% endblock %}
+
+{% block invite %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h2>Employee Invites</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <table class="table">
+                <tr>
+                    <th>Employee</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                {% for employee in invitable %}
+                <tr>
+                    <td>{{ employee.name }}</td>
+                    <td>{{ employee.email }}</td>
+                    <td>
+                        <form method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="name" value="{{ employee.name }}" />
+                            <input type="hidden" name="email" value="{{ employee.email }}" />
+                            <input type="hidden" name="id" value="{{ employee.id }}" />
+                            <button type="submit" class="btn btn-primary">Invite</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <h4>Missing Emails</h4>
+            <p>Enter an email for these employees into Lightspeed to send them an invite</p>
+            <table class="table">
+                <tr>
+                    <th>Employee</th>
+                </tr>
+                {% for employee in missing_email %}
+                <tr>
+                    <td>{{ employee.name }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <h4>Pending Invites</h4>
+            <table class="table">
+                <tr>
+                    <th>Employee</th>
+                </tr>
+                {% for employee in pending_invite %}
+                <tr>
+                    <td>{{ employee.name }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <h4>Accepted Invites</h4>
+            <table class="table">
+                <tr>
+                    <th>Employee</th>
+                </tr>
+                {% for employee in accepted_invite %}
+                <tr>
+                    <td>{{ employee.name }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

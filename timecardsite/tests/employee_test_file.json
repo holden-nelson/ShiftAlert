@@ -1,0 +1,620 @@
+[
+  {
+    "@attributes": {
+        "count": "10",
+        "offset": "0",
+        "limit": "100"
+    },
+    "Employee": [
+        {
+            "employeeID": "1",
+            "firstName": "Ex1",
+            "lastName": "Employee",
+            "lockOut": "false",
+            "archived": "false",
+            "timeStamp": "2021-04-21T21:45:03+00:00",
+            "contactID": "1",
+            "clockInEmployeeHoursID": "0",
+            "employeeRoleID": "4",
+            "limitToShopID": "0",
+            "lastShopID": "2",
+            "lastSaleID": "0",
+            "lastRegisterID": "0"
+        },
+        {
+            "employeeID": "39",
+            "firstName": "Ex2",
+            "lastName": "Employee",
+            "lockOut": "false",
+            "archived": "false",
+            "timeStamp": "2021-04-22T00:30:00+00:00",
+            "contactID": "1282",
+            "clockInEmployeeHoursID": "0",
+            "employeeRoleID": "1",
+            "limitToShopID": "0",
+            "lastShopID": "2",
+            "lastSaleID": "0",
+            "lastRegisterID": "0"
+        },
+        {
+            "employeeID": "48",
+            "firstName": "Ex3",
+            "lastName": "Employee",
+            "lockOut": "false",
+            "archived": "false",
+            "timeStamp": "2021-04-13T19:14:55+00:00",
+            "contactID": "1466",
+            "clockInEmployeeHoursID": "0",
+            "employeeRoleID": "1",
+            "limitToShopID": "0",
+            "lastShopID": "2",
+            "lastSaleID": "0",
+            "lastRegisterID": "0"
+        },
+        {
+            "employeeID": "55",
+            "firstName": "Ex4",
+            "lastName": "Employee",
+            "lockOut": "false",
+            "archived": "false",
+            "timeStamp": "2021-04-17T23:43:45+00:00",
+            "contactID": "1587",
+            "clockInEmployeeHoursID": "0",
+            "employeeRoleID": "1",
+            "limitToShopID": "0",
+            "lastShopID": "1",
+            "lastSaleID": "0",
+            "lastRegisterID": "0"
+        },
+        {
+            "employeeID": "62",
+            "firstName": "Ex5",
+            "lastName": "Employee",
+            "lockOut": "false",
+            "archived": "false",
+            "timeStamp": "2021-04-18T23:31:10+00:00",
+            "contactID": "1842",
+            "clockInEmployeeHoursID": "0",
+            "employeeRoleID": "1",
+            "limitToShopID": "0",
+            "lastShopID": "2",
+            "lastSaleID": "0",
+            "lastRegisterID": "0"
+        },
+        {
+            "employeeID": "63",
+            "firstName": "Ex6",
+            "lastName": "Employee",
+            "lockOut": "false",
+            "archived": "false",
+            "timeStamp": "2021-04-22T17:45:48+00:00",
+            "contactID": "1987",
+            "clockInEmployeeHoursID": "0",
+            "employeeRoleID": "2",
+            "limitToShopID": "0",
+            "lastShopID": "1",
+            "lastSaleID": "0",
+            "lastRegisterID": "0"
+        },
+        {
+            "employeeID": "64",
+            "firstName": "Ex7",
+            "lastName": "Employee",
+            "lockOut": "false",
+            "archived": "false",
+            "timeStamp": "2021-04-22T16:51:50+00:00",
+            "contactID": "2024",
+            "clockInEmployeeHoursID": "0",
+            "employeeRoleID": "0",
+            "limitToShopID": "0",
+            "lastShopID": "2",
+            "lastSaleID": "69794",
+            "lastRegisterID": "5"
+        },
+        {
+            "employeeID": "65",
+            "firstName": "Ex8",
+            "lastName": "Employee",
+            "lockOut": "false",
+            "archived": "false",
+            "timeStamp": "2021-04-22T18:31:13+00:00",
+            "contactID": "2270",
+            "clockInEmployeeHoursID": "4884",
+            "employeeRoleID": "1",
+            "limitToShopID": "0",
+            "lastShopID": "1",
+            "lastSaleID": "69819",
+            "lastRegisterID": "1"
+        },
+        {
+            "employeeID": "67",
+            "firstName": "Ex9",
+            "lastName": "Employee",
+            "lockOut": "false",
+            "archived": "false",
+            "timeStamp": "2021-04-22T18:19:44+00:00",
+            "contactID": "2281",
+            "clockInEmployeeHoursID": "4885",
+            "employeeRoleID": "1",
+            "limitToShopID": "0",
+            "lastShopID": "2",
+            "lastSaleID": "69818",
+            "lastRegisterID": "5"
+        },
+        {
+            "employeeID": "68",
+            "firstName": "Ex10",
+            "lastName": "Employee",
+            "lockOut": "false",
+            "archived": "false",
+            "timeStamp": "2021-04-19T18:57:19+00:00",
+            "contactID": "2657",
+            "clockInEmployeeHoursID": "0",
+            "employeeRoleID": "1",
+            "limitToShopID": "0",
+            "lastShopID": "0",
+            "lastSaleID": "0",
+            "lastRegisterID": "0"
+        }
+    ]
+  },
+  {
+    "@attributes": {
+        "count": "10",
+        "offset": "0",
+        "limit": "100"
+    },
+    "Employee": [
+        {
+            "employeeID": "1",
+            "firstName": "Ex1",
+            "lastName": "Employee",
+            "lockOut": "false",
+            "archived": "false",
+            "timeStamp": "2021-04-21T21:45:03+00:00",
+            "contactID": "1",
+            "clockInEmployeeHoursID": "0",
+            "employeeRoleID": "4",
+            "limitToShopID": "0",
+            "lastShopID": "2",
+            "lastSaleID": "0",
+            "lastRegisterID": "0",
+            "Contact": {
+                "contactID": "1",
+                "custom": "",
+                "noEmail": "false",
+                "noPhone": "false",
+                "noMail": "false",
+                "Addresses": {
+                    "ContactAddress": {
+                        "address1": "",
+                        "address2": "",
+                        "city": "",
+                        "state": "",
+                        "zip": "",
+                        "country": "",
+                        "countryCode": "",
+                        "stateCode": ""
+                    }
+                },
+                "Phones": {
+                    "ContactPhone": {
+                        "number": "111-111-1111",
+                        "useType": "Work"
+                    }
+                },
+                "Emails": {
+                    "ContactEmail": {
+                        "address": "ex1employee@gmail.com",
+                        "useType": "Primary"
+                    }
+                },
+                "Websites": "",
+                "timeStamp": "2020-11-09T23:00:28+00:00"
+            }
+        },
+        {
+            "employeeID": "39",
+            "firstName": "Ex2",
+            "lastName": "Employee",
+            "lockOut": "false",
+            "archived": "false",
+            "timeStamp": "2021-04-22T00:30:00+00:00",
+            "contactID": "1282",
+            "clockInEmployeeHoursID": "0",
+            "employeeRoleID": "1",
+            "limitToShopID": "0",
+            "lastShopID": "2",
+            "lastSaleID": "0",
+            "lastRegisterID": "0",
+            "Contact": {
+                "contactID": "1282",
+                "custom": "",
+                "noEmail": "true",
+                "noPhone": "true",
+                "noMail": "true",
+                "Addresses": {
+                    "ContactAddress": {
+                        "address1": "",
+                        "address2": "",
+                        "city": "",
+                        "state": "",
+                        "zip": "",
+                        "country": "",
+                        "countryCode": "",
+                        "stateCode": ""
+                    }
+                },
+                "Phones": "",
+                "Emails": "",
+                "Websites": "",
+                "timeStamp": "2021-04-07T01:37:56+00:00"
+            }
+        },
+        {
+            "employeeID": "48",
+            "firstName": "Ex3",
+            "lastName": "Employee",
+            "lockOut": "false",
+            "archived": "false",
+            "timeStamp": "2021-04-13T19:14:55+00:00",
+            "contactID": "1466",
+            "clockInEmployeeHoursID": "0",
+            "employeeRoleID": "1",
+            "limitToShopID": "0",
+            "lastShopID": "2",
+            "lastSaleID": "0",
+            "lastRegisterID": "0",
+            "Contact": {
+                "contactID": "1466",
+                "custom": "",
+                "noEmail": "true",
+                "noPhone": "true",
+                "noMail": "true",
+                "Addresses": {
+                    "ContactAddress": {
+                        "address1": "",
+                        "address2": "",
+                        "city": "",
+                        "state": "",
+                        "zip": "",
+                        "country": "",
+                        "countryCode": "",
+                        "stateCode": ""
+                    }
+                },
+                "Phones": {
+                    "ContactPhone": {
+                        "number": "333-333-3333",
+                        "useType": "Mobile"
+                    }
+                },
+                "Emails": "",
+                "Websites": "",
+                "timeStamp": "2021-04-02T16:54:11+00:00"
+            }
+        },
+        {
+            "employeeID": "55",
+            "firstName": "Ex4",
+            "lastName": "Employee",
+            "lockOut": "false",
+            "archived": "false",
+            "timeStamp": "2021-04-17T23:43:45+00:00",
+            "contactID": "1587",
+            "clockInEmployeeHoursID": "0",
+            "employeeRoleID": "1",
+            "limitToShopID": "0",
+            "lastShopID": "1",
+            "lastSaleID": "0",
+            "lastRegisterID": "0",
+            "Contact": {
+                "contactID": "1587",
+                "custom": "",
+                "noEmail": "true",
+                "noPhone": "true",
+                "noMail": "true",
+                "Addresses": {
+                    "ContactAddress": {
+                        "address1": "",
+                        "address2": "",
+                        "city": "",
+                        "state": "",
+                        "zip": "",
+                        "country": "",
+                        "countryCode": "",
+                        "stateCode": ""
+                    }
+                },
+                "Phones": {
+                    "ContactPhone": {
+                        "number": "444-444-4444",
+                        "useType": "Mobile"
+                    }
+                },
+                "Emails": {
+                    "ContactEmail": {
+                        "address": "ex4employee@aol.com",
+                        "useType": "Primary"
+                    }
+                },
+                "Websites": "",
+                "timeStamp": "2021-01-25T15:44:59+00:00"
+            }
+        },
+        {
+            "employeeID": "62",
+            "firstName": "Ex5",
+            "lastName": "Employee",
+            "lockOut": "false",
+            "archived": "false",
+            "timeStamp": "2021-04-18T23:31:10+00:00",
+            "contactID": "1842",
+            "clockInEmployeeHoursID": "0",
+            "employeeRoleID": "1",
+            "limitToShopID": "0",
+            "lastShopID": "2",
+            "lastSaleID": "0",
+            "lastRegisterID": "0",
+            "Contact": {
+                "contactID": "1842",
+                "custom": "",
+                "noEmail": "true",
+                "noPhone": "true",
+                "noMail": "true",
+                "Addresses": {
+                    "ContactAddress": {
+                        "address1": "",
+                        "address2": "",
+                        "city": "",
+                        "state": "",
+                        "zip": "",
+                        "country": "",
+                        "countryCode": "",
+                        "stateCode": ""
+                    }
+                },
+                "Phones": "",
+                "Emails": {
+                    "ContactEmail": {
+                        "address": "ex5employee@gmail.com",
+                        "useType": "Primary"
+                    }
+                },
+                "Websites": "",
+                "timeStamp": "2021-01-23T18:11:38+00:00"
+            }
+        },
+        {
+            "employeeID": "63",
+            "firstName": "Ex6",
+            "lastName": "Employee",
+            "lockOut": "false",
+            "archived": "false",
+            "timeStamp": "2021-04-22T17:45:48+00:00",
+            "contactID": "1987",
+            "clockInEmployeeHoursID": "0",
+            "employeeRoleID": "2",
+            "limitToShopID": "0",
+            "lastShopID": "1",
+            "lastSaleID": "0",
+            "lastRegisterID": "0",
+            "Contact": {
+                "contactID": "1987",
+                "custom": "",
+                "noEmail": "true",
+                "noPhone": "true",
+                "noMail": "true",
+                "Addresses": {
+                    "ContactAddress": {
+                        "address1": "po box 6000",
+                        "address2": "",
+                        "city": "Silvertown",
+                        "state": "ID",
+                        "zip": "88888",
+                        "country": "",
+                        "countryCode": "",
+                        "stateCode": ""
+                    }
+                },
+                "Phones": {
+                    "ContactPhone": {
+                        "number": "666-666-6666",
+                        "useType": "Mobile"
+                    }
+                },
+                "Emails": {
+                    "ContactEmail": {
+                        "address": "ex6employee@gmail.com",
+                        "useType": "Primary"
+                    }
+                },
+                "Websites": "",
+                "timeStamp": "2021-04-19T13:49:13+00:00"
+            }
+        },
+        {
+            "employeeID": "64",
+            "firstName": "Ex7",
+            "lastName": "Employee",
+            "lockOut": "false",
+            "archived": "false",
+            "timeStamp": "2021-04-22T16:51:50+00:00",
+            "contactID": "2024",
+            "clockInEmployeeHoursID": "0",
+            "employeeRoleID": "0",
+            "limitToShopID": "0",
+            "lastShopID": "2",
+            "lastSaleID": "69794",
+            "lastRegisterID": "5",
+            "Contact": {
+                "contactID": "2024",
+                "custom": "",
+                "noEmail": "true",
+                "noPhone": "true",
+                "noMail": "true",
+                "Addresses": {
+                    "ContactAddress": {
+                        "address1": "",
+                        "address2": "",
+                        "city": "",
+                        "state": "",
+                        "zip": "",
+                        "country": "",
+                        "countryCode": "",
+                        "stateCode": ""
+                    }
+                },
+                "Phones": {
+                    "ContactPhone": {
+                        "number": "777-777-7777",
+                        "useType": "Mobile"
+                    }
+                },
+                "Emails": "",
+                "Websites": "",
+                "timeStamp": "2021-03-01T19:24:46+00:00"
+            }
+        },
+        {
+            "employeeID": "65",
+            "firstName": "Ex8",
+            "lastName": "Employee",
+            "lockOut": "false",
+            "archived": "false",
+            "timeStamp": "2021-04-22T18:31:13+00:00",
+            "contactID": "2270",
+            "clockInEmployeeHoursID": "4884",
+            "employeeRoleID": "1",
+            "limitToShopID": "0",
+            "lastShopID": "1",
+            "lastSaleID": "69819",
+            "lastRegisterID": "1",
+            "Contact": {
+                "contactID": "2270",
+                "custom": "",
+                "noEmail": "true",
+                "noPhone": "true",
+                "noMail": "true",
+                "Addresses": {
+                    "ContactAddress": {
+                        "address1": "P.O. Box 6001",
+                        "address2": "",
+                        "city": "Silvertown",
+                        "state": "Idaho",
+                        "zip": "88888",
+                        "country": "",
+                        "countryCode": "",
+                        "stateCode": ""
+                    }
+                },
+                "Phones": {
+                    "ContactPhone": {
+                        "number": "888-888-8888",
+                        "useType": "Mobile"
+                    }
+                },
+                "Emails": {
+                    "ContactEmail": {
+                        "address": "ex8employee@hotmail.com",
+                        "useType": "Primary"
+                    }
+                },
+                "Websites": "",
+                "timeStamp": "2020-11-29T21:14:47+00:00"
+            }
+        },
+        {
+            "employeeID": "67",
+            "firstName": "Ex9",
+            "lastName": "Employee",
+            "lockOut": "false",
+            "archived": "false",
+            "timeStamp": "2021-04-22T18:19:44+00:00",
+            "contactID": "2281",
+            "clockInEmployeeHoursID": "4885",
+            "employeeRoleID": "1",
+            "limitToShopID": "0",
+            "lastShopID": "2",
+            "lastSaleID": "69818",
+            "lastRegisterID": "5",
+            "Contact": {
+                "contactID": "2281",
+                "custom": "",
+                "noEmail": "true",
+                "noPhone": "true",
+                "noMail": "true",
+                "Addresses": {
+                    "ContactAddress": {
+                        "address1": "6002 Silver Dr",
+                        "address2": "",
+                        "city": "Silvertown",
+                        "state": "ID",
+                        "zip": "88888",
+                        "country": "",
+                        "countryCode": "",
+                        "stateCode": ""
+                    }
+                },
+                "Phones": {
+                    "ContactPhone": {
+                        "number": "999-999-9999",
+                        "useType": "Mobile"
+                    }
+                },
+                "Emails": {
+                    "ContactEmail": {
+                        "address": "ex9employee@ex9employee.com",
+                        "useType": "Primary"
+                    }
+                },
+                "Websites": "",
+                "timeStamp": "2020-12-28T17:50:01+00:00"
+            }
+        },
+        {
+            "employeeID": "68",
+            "firstName": "Ex10",
+            "lastName": "Employee",
+            "lockOut": "false",
+            "archived": "false",
+            "timeStamp": "2021-04-19T18:57:19+00:00",
+            "contactID": "2657",
+            "clockInEmployeeHoursID": "0",
+            "employeeRoleID": "1",
+            "limitToShopID": "0",
+            "lastShopID": "0",
+            "lastSaleID": "0",
+            "lastRegisterID": "0",
+            "Contact": {
+                "contactID": "2657",
+                "custom": "",
+                "noEmail": "true",
+                "noPhone": "false",
+                "noMail": "true",
+                "Addresses": {
+                    "ContactAddress": {
+                        "address1": "",
+                        "address2": "",
+                        "city": "",
+                        "state": "",
+                        "zip": "",
+                        "country": "",
+                        "countryCode": "",
+                        "stateCode": ""
+                    }
+                },
+                "Phones": {
+                    "ContactPhone": {
+                        "number": "000-000-0000",
+                        "useType": "Mobile"
+                    }
+                },
+                "Emails": "",
+                "Websites": "",
+                "timeStamp": "2021-04-19T18:57:19+00:00"
+            }
+        }
+    ]
+  }
+]

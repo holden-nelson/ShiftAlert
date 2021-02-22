@@ -1,0 +1,170 @@
+Let's think about features
+This app
+    - lets employees see their shifts for a given date range
+    - lets managers see all shifts for a given date range
+    - lets managers see a given employees shifts for a given date range
+
+Lets' think about these views
+    index
+    here's what it does:
+        redirects to post_login if user is authenticated
+        else redirects to login page
+
+    auth
+    here's what it does:
+        attempts to capture a code from the url
+        if code exists
+            requests the tokens from a service function
+            uses tokens to request account_info from service function
+            saves that account info to the db
+            requests shop info from a service function
+            saves shop info to the db
+                what if they add shops later? fuck it, i guess?
+            creates a profile and saves it
+            redirects to post_login
+        else just shits the bed i guess
+    here's what it should do:
+        404 if there is no code
+        passes code to a service method that returns info for new account
+
+
+
+    post_login
+    here's what it does:
+        tries to find an active profile for the user
+            if so, checks if user is mgr
+                if user has onboarded
+                    redirect to employee (lol)
+                else redirects to onboardd
+            else redirects to employee
+        if not - redirect to connect
+    here's what it should do:
+        if user has been onboarded
+            redirect to dashboard
+        else redirect to onboard
+
+    connect
+    here's what it does:
+        renders a shitty page with a link to click that says 'connect to lightspeed' or whatever
+    here's what it should do:
+        not exist - this can just be a message on the dashboard
+
+    onboard
+    here's what it does:
+        probably quicker to explain what it doesn't do
+        the general idea is that it provides a form for users to complete their profile
+        tries to get employee info from a service function
+            if the tokens expired
+                refresh the token
+                add the new token to the profile
+                save the profile to the database
+                try again
+        manipulates this employee info to instead be a list of tuples in the form (id, name)
+        if the method is post
+            builds a form from the POST request data
+            if the form is valid
+                pull out profile info from form
+                notes that the user has been onboarded
+                saves the profile to the db
+                redirect to employee
+            if the form isnt valid, just break i guess?
+        else if its get
+            make a new form
+            render the onboarding page
+    here's what it should do:
+        get employee info from account function
+        if the method is post
+            build a form from the post request data
+            if the form is valid
+                pull out profile info from form
+                note that the user has onboarded
+                save profile to db
+                redirect to dashboard
+            if the form isnt valid
+                do something other then break
+        else if its get
+            make a new form
+            render the onboarding page
+    general notes on this view:
+        it'd be sweet if there was some way to only call the api on gets, not posts
+        hidden id field in form?
+
+    manager
+    here's what it does:
+        oh boy
+        the general idea is that it shows every shift for date interval, hours
+        totals for stores and employees
+        fetches the saved timezone from the account and activates it
+        if there are GET parameters with the request:
+            pull start and end dates out of get parameters
+            convert them to datetime objects from iso
+        else
+            default start date is two weeks ago
+            default end date is today
+        localize our start and end dates using users_timezone fetched earlier
+        try to get a list of shifts from service function
+            if the tokens expired
+                do that whole dance again
+        try to get a list of employees from service function
+            if the tokens expired
+                do that whole dance again
+        make an empty list to hold shift dicts
+        make an empty defaultdict to hold employee hours totals
+        make an empty defaultdict to hold shop hours totals
+        for each shift in the service function response
+            use the shop id to get the shop name from model
+            use the employee id to get the employee name from earlier request
+            if there is a check out value
+                subtract check in from checkout to get shift length
+            if not
+                subtract check in from now to get current shift length
+            convert shift length to hours by dividing total seconds by 3600
+            add these hours to default dicts
+            construct a dict with shift information and add it to shifts list
+        construct a master dict to hold all this context for the template
+        render managers
+    here's what it should do
+        it should be called something else like all shifts, for one
+        pull the users timezone from the account and activate it
+        if there are GET parameters in the request:
+            pull them out
+            convert them to datetime objects
+        else:
+            just do the last two weeks
+        localize the start and end dates
+        Call an account function that returns a list of dicts with all the necessary info
+        pass that on to the template
+
+    timecard
+        the purpose is to list the shifts and total hours for one
+        employee for a given date range
+        pull the users timezone from the account and activate it
+        if there are GET parameters in the request:
+            pull them out
+            convert them to datetime objects
+        else:
+            just do the last two weeks
+        localize the start and end dates
+        Call an account function that returns a list of dicts with all the necessary info
+        pass that on to the template
+
+My predicament
+I can't "attach" an api object to an account model the way I thought I could.
+My thinking is that I can create a Service class that does all of the stuff I want the
+account methods to do
+Now to think about this instantiation issue
+I need to use the Plaw library directly before I'm able to create an account
+Ideally my views would not interact with Plaw directly
+Maybe I scrap the service class and make them "pure" functions -
+for ex. one could take the code as param and return the info I need to make the Account object
+Others could take the account object as a param and return the info I need
+
+
+
+
+
+
+
+
+
+
