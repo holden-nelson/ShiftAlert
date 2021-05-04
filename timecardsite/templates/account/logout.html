@@ -1,0 +1,31 @@
+{% extends "account/accounts_base.html" %}
+
+{% block head_title %}Sign Out{% endblock %}
+
+{% load static %}
+
+{% block body %}
+<div class="container">
+    <h1 class="text-center logo my-4">
+        <a href="{% url 'index' %}">
+            <img src="{% static 'img/logo.png' %}">
+        </a>
+    </h1>
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10 col-sm-12">
+            <div class="card text-white bg-primary mb-3">
+                <div class="card-body">
+                    <h3 class="card-title">Are you sure you want to sign out?</h3>
+                    <form class="logout" id="logout_form" method="post" action="{% url 'account_logout' %}">
+                        {% csrf_token %}
+                        {% if redirect_field_value %}
+                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                        {% endif %}
+                        <button type="submit" class="btn btn-success btn-block">Logout &raquo;</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

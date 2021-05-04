@@ -8,3 +8,4 @@ requests
 django-invitations
 django-allauth
 django-timezone-field
+django-widget-tweaks
