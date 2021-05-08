@@ -74,9 +74,10 @@ class ViewsTests(TestCase):
     @patch('timecardsite.views.services.get_initial_account_data')
     def test_auth_view_passes_code_to_service_function(self, mocked_initial):
         code = generate_random_token()
+        user_id = get_user_model().objects.get(email='unauthed@user.com').id
 
         self.client.login(email='unauthed@user.com', password='unauthedpassword')
-        self.client.get(f'/auth/?code={code}')
+        self.client.get(f'/auth/?code={code}&state={user_id}')
 
         mocked_initial.assert_called_with(code)
 
@@ -90,8 +91,10 @@ class ViewsTests(TestCase):
         }
         mocked_initial.return_value = test_initial
 
+        user_id = get_user_model().objects.get(email='unauthed@user.com').id
+
         self.client.login(email='unauthed@user.com', password='unauthedpassword')
-        self.client.get(f'/auth/?code={generate_random_token()}')
+        self.client.get(f'/auth/?code={generate_random_token()}&state={user_id}')
 
         self.assertTrue(Account.objects.filter(account_id=test_initial['account_id']).exists())
         new_account = Account.objects.get(account_id=test_initial['account_id'])
@@ -109,8 +112,10 @@ class ViewsTests(TestCase):
         }
         mocked_initial.return_value = test_initial
 
+        user_id = get_user_model().objects.get(email='unauthed@user.com').id
+
         self.client.login(email='unauthed@user.com', password='unauthedpassword')
-        self.client.get(f'/auth/?code={generate_random_token()}')
+        self.client.get(f'/auth/?code={generate_random_token()}&state={user_id}')
 
         self.assertTrue(Profile.objects.filter(account_id=test_initial['account_id']).exists())
         new_profile = Profile.objects.get(account_id=test_initial['account_id'])
@@ -119,8 +124,10 @@ class ViewsTests(TestCase):
 
     @patch('timecardsite.views.services.get_initial_account_data')
     def test_auth_view_redirects_to_post_login(self, mocked_initial):
+        user_id = get_user_model().objects.get(email='unauthed@user.com').id
+
         self.client.login(email='unauthed@user.com', password='unauthedpassword')
-        response = self.client.get(f'/auth/?code={generate_random_token()}')
+        response = self.client.get(f'/auth/?code={generate_random_token()}&state={user_id}')
 
         self.assertRedirects(response, reverse('post_login'), fetch_redirect_response=False)
 
@@ -128,7 +135,7 @@ class ViewsTests(TestCase):
         self.client.login(email='employee@user.com', password='employeepassword')
         response = self.client.get(reverse('post_login'))
 
-        self.assertRedirects(response, reverse('timecard'))
+        self.assertRedirects(response, reverse('timecard'), fetch_redirect_response=False)
 
     @patch('timecardsite.views.services.get_initial_account_data')
     def test_post_login_redirects_to_onboard_view_for_new_user(self, mocked_initial):
@@ -140,8 +147,10 @@ class ViewsTests(TestCase):
         }
         mocked_initial.return_value = test_initial
 
+        user_id = get_user_model().objects.get(email='unauthed@user.com').id
+
         self.client.login(email='unauthed@user.com', password='unauthedpassword')
-        self.client.get(f'/auth/?code={generate_random_token()}', follow=False)
+        self.client.get(f'/auth/?code={generate_random_token()}&state={user_id}', follow=False)
         response = self.client.get('/post_login/')
 
         self.assertRedirects(response, reverse('onboard'), fetch_redirect_response=False)
@@ -151,6 +160,12 @@ class ViewsTests(TestCase):
         response = self.client.get(reverse('post_login'))
 
         self.assertRedirects(response, reverse('dashboard'))
+
+    def test_post_login_view_redirects_to_connect_view_for_unconnected_user(self):
+        self.client.login(email='unauthed@user.com', password='unauthedpassword')
+        response = self.client.get('/post_login/')
+
+        self.assertRedirects(response, reverse('connect'))
 
     @patch('timecardsite.views.OnboardingForm')
     def test_onboarding_view_saves_account_and_profile_info_to_db_on_post(self, mocked_form):

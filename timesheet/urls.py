@@ -21,10 +21,11 @@ urlpatterns = [
 
     path('auth/', views.auth, name='auth'),
     path('post_login/', views.post_login, name='post_login'),
+    path('connect/', views.connect, name='connect'),
     path('onboard/', views.onboard, name='onboard'),
 
     path('timecard/', views.timecard, name='timecard'),
     path('dashboard/', views.dashboard, name='dashboard'),
 
-    path('account/', include('allauth.urls')),
+    path('accounts/', include('allauth.urls')),
 ]

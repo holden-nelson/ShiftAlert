@@ -1,20 +1,16 @@
-from datetime import timezone
-
 from django.http import Http404, HttpResponse
 from django.shortcuts import redirect, render
+from django.utils import timezone
+from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
 
 from timecardsite import services
 from timecardsite.models import Account, Profile
 from timecardsite.forms import OnboardingForm
 
+@login_required()
 def index(request):
-    '''
-    kind of a stand in for now - just displays the connect link
-    '''
-    if request.user.is_authenticated:
-        return HttpResponse('<html><body><a href="https://cloud.lightspeedapp.com/oauth/authorize.php?response_type=code&client_id=aedd49fc98a386cbf6a8939d89cf671683078bd7ba349292a226772024adc466&scope=employee:all">Connect to Lightspeed</a></body></html>')
-    else:
-        return redirect('/account/login')
+    return render(request, 'index.html')
 
 def auth(request):
     '''
@@ -25,12 +21,13 @@ def auth(request):
     code = request.GET.get('code')
 
     if code:
+
         account_info = services.get_initial_account_data(code)
         account = Account(**account_info)
         account.save()
 
         profile_info = {
-            'user': request.user,
+            'user': get_user_model().objects.get(id=request.GET.get('state')),
             'account': account,
             'role': 'mgr'
         }
@@ -40,6 +37,7 @@ def auth(request):
     else:
         raise Http404('No code provided.')
 
+@login_required()
 def post_login(request):
     '''
     determines where the user should be routed after being logged in
@@ -51,7 +49,7 @@ def post_login(request):
     try:
         request.user.profile
     except Profile.DoesNotExist:
-        return redirect('index') # for now
+        return redirect('connect') # for now
 
     if request.user.profile.role == 'mgr':
         if request.user.profile.account.is_onboarded:
@@ -61,6 +59,13 @@ def post_login(request):
     else:
         return redirect('timecard')
 
+@login_required()
+def connect(request):
+    access_link = f'https://cloud.lightspeedapp.com/oauth/authorize.php?response_type=code&client_id=aedd49fc98a386cbf6a8939d89cf671683078bd7ba349292a226772024adc466&scope=employee:all&state={request.user.id}'
+
+    return render(request, 'connect.html', {'access_link': access_link})
+
+@login_required()
 def onboard(request):
     if request.method == 'POST':
         form = OnboardingForm(request.POST,
@@ -80,6 +85,7 @@ def onboard(request):
     # TODO: render an onboarding template with context instead
     return HttpResponse()
 
+@login_required()
 def timecard(request):
     timezone.activate(request.user.profile.account.timezone)
 
@@ -100,7 +106,7 @@ def timecard(request):
         )
 
     # TODO take the context from data and pass it to template
-    return HttpResponse()
+    return render(request, 'timecard.html', employee_shift_data)
 
 def dashboard(request):
     return HttpResponse()
