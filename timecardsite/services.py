@@ -35,7 +35,8 @@ def get_employee_ids_and_names(account):
     employee_list = []
     for employee in next(api.employee())['Employee']:
         employee_list.append(
-            (employee['employeeID'], employee['firstName'] + employee['lastName'])
+            (employee['employeeID'] + ',' + employee['firstName'] + ' ' + employee['lastName'],
+             employee['firstName'] + ' ' + employee['lastName'])
         )
 
     return employee_list
@@ -82,6 +83,7 @@ def get_shifts_and_totals_for_given_employee(account, employee_id,
                 check_out = datetime.fromisoformat(shift['checkOut'])
                 shift_delta = check_out - check_in
             else:
+                check_out = None
                 shift_delta = datetime.now(timezone.utc) - check_in
             shift_time = shift_delta.total_seconds() / 3600
 
@@ -90,7 +92,7 @@ def get_shifts_and_totals_for_given_employee(account, employee_id,
 
             employee_shifts.append({
                 'check_in': check_in,
-                'check_out': check_out if check_out else None,
+                'check_out': check_out,
                 'shift_time': shift_time,
                 'shop': shops[shift['shopID']]
             })

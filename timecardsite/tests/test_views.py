@@ -171,8 +171,7 @@ class ViewsTests(TestCase):
     def test_onboarding_view_saves_account_and_profile_info_to_db_on_post(self, mocked_form):
         test_cleaned_data = {
             'timezone': 'America/Boise',
-            'employee_id': '11',
-            'name': 'Test Employee'
+            'employees': '11,Joe Manager',
         }
 
         mocked_form.return_value.is_valid.return_value = True
@@ -181,10 +180,70 @@ class ViewsTests(TestCase):
         self.client.login(email='manager@user.com', password='managerpassword')
         response = self.client.post('/onboard/')
 
+        id, name = test_cleaned_data['employees'].split(',')
+
         self.assertEqual(response.wsgi_request.user.profile.account.timezone, test_cleaned_data['timezone'])
-        self.assertEqual(response.wsgi_request.user.profile.employee_id, test_cleaned_data['employee_id'])
+        self.assertEqual(response.wsgi_request.user.profile.employee_id, id)
+        self.assertEqual(response.wsgi_request.user.profile.name, name)
+
+    @patch('timecardsite.views.OnboardingForm')
+    def test_onboarding_view_redirects_to_manager_dashboard_on_valid_form_submission(self, mocked_form):
+        test_cleaned_data = {
+            'timezone': 'America/Boise',
+            'employees': '11,Joe Manager',
+        }
+
+        mocked_form.return_value.is_valid.return_value = True
+        mocked_form.return_value.cleaned_data = test_cleaned_data
+
+        self.client.login(email='manager@user.com', password='managerpassword')
+        response = self.client.post('/onboard/')
+
+        self.assertRedirects(response, reverse('dashboard'))
+
+    @patch('timecardsite.views.OnboardingForm')
+    def test_onboarding_view_redirects_to_name_view_on_non_employee_selection(self, mocked_form):
+        test_cleaned_data = {
+            'timezone': 'America/Boise',
+            'employees': '00',
+        }
+
+        mocked_form.return_value.is_valid.return_value = True
+        mocked_form.return_value.cleaned_data = test_cleaned_data
+
+        self.client.login(email='manager@user.com', password='managerpassword')
+        response = self.client.post('/onboard/')
+
+        self.assertRedirects(response, reverse('name'))
+
+    @patch('timecardsite.views.NameForm')
+    def test_name_view_saves_given_name_to_db(self, mocked_form):
+        test_cleaned_data = {
+            'name': 'Joe Administrator'
+        }
+
+        mocked_form.return_value.is_valid.return_value = True
+        mocked_form.return_value.cleaned_data = test_cleaned_data
+
+        self.client.login(email='manager@user.com', password='managerpassword')
+        response = self.client.post('/name/')
+
         self.assertEqual(response.wsgi_request.user.profile.name, test_cleaned_data['name'])
 
-    def test_onboarding_view_redirects_to_manager_dashboard_on_valid_form_submission(self):
-        pass
+    @patch('timecardsite.views.NameForm')
+    def test_name_view_redirects_to_dashboard_view(self, mocked_form):
+        test_cleaned_data = {
+            'name': 'Joe Administrator'
+        }
+
+        mocked_form.return_value.is_valid.return_value = True
+        mocked_form.return_value.cleaned_data = test_cleaned_data
+
+        self.client.login(email='manager@user.com', password='managerpassword')
+        response = self.client.post('/name/')
+
+        self.assertRedirects(response, reverse('dashboard'))
+
+
+
 

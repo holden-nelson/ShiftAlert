@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 
 from timecardsite import services
 from timecardsite.models import Account, Profile
-from timecardsite.forms import OnboardingForm
+from timecardsite.forms import OnboardingForm, NameForm
 
 @login_required()
 def index(request):
@@ -72,18 +72,40 @@ def onboard(request):
                               account=request.user.profile.account)
         if form.is_valid():
             request.user.profile.account.timezone = form.cleaned_data['timezone']
-            request.user.profile.employee_id = form.cleaned_data['employee_id']
-            request.user.profile.name = form.cleaned_data['name']
+
+            if ',' in form.cleaned_data['employees']:
+                id, name = form.cleaned_data['employees'].split(',')
+                request.user.profile.employee_id = id
+                request.user.profile.name = name
+            else:
+                id = form.cleaned_data['employees']
+                request.user.profile.employee_id = id
+
             request.user.profile.account.is_onboarded = True
 
             request.user.profile.account.save()
             request.user.profile.save()
-            return redirect('dashboard')
+
+            if id == '00':
+                return redirect('name')
+            else:
+                return redirect('dashboard')
     else:
         form = OnboardingForm(account=request.user.profile.account)
 
-    # TODO: render an onboarding template with context instead
-    return HttpResponse()
+    return render(request, 'onboard.html', {'form': form})
+
+def name(request):
+    if request.method == 'POST':
+        form = NameForm(request.POST)
+        if form.is_valid():
+            request.user.profile.name = form.cleaned_data['name']
+            request.user.profile.save()
+            return redirect('dashboard')
+    else:
+        form = NameForm()
+
+        return render(request, 'name.html', {'form': form})
 
 @login_required()
 def timecard(request):
