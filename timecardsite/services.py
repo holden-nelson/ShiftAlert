@@ -41,6 +41,31 @@ def get_employee_ids_and_names(account):
 
     return employee_list
 
+def get_employee_ids_names_and_emails(account):
+    api = Plaw(CLIENT_ID, CLIENT_SECRET,
+               account_id=account.account_id,
+               refresh_token=account.refresh_token,
+               access_token=account.access_token)
+
+    employee_list = []
+    for employee in next(api.employee(load_contact=True))['Employee']:
+        employee_id = employee['employeeID']
+        employee_name = employee['firstName'] + ' ' + employee['lastName']
+        try:
+            employee_email = employee['Contact']['Emails']['ContactEmail']['address']
+        except TypeError:
+            employee_email = None
+
+        employee_list.append(
+            {
+                'id': employee_id,
+                'name': employee_name,
+                'email': employee_email
+            }
+        )
+
+    return employee_list
+
 def get_shifts_and_totals_for_given_employee(account, employee_id,
                                              start_date=None, end_date=None):
     api = Plaw(CLIENT_ID, CLIENT_SECRET,

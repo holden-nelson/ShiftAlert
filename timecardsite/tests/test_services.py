@@ -46,7 +46,7 @@ class ServicesTests(TestCase):
         mocked_token.assert_called_with(test_code)
 
     @patch('timecardsite.services.next')
-    def test_get_employees(self, mocked_next):
+    def test_get_employee_ids_and_names(self, mocked_next):
         with open('timecardsite/tests/employee_test_file.json') as jf:
             test_employee_info = json.load(jf)[0]
 
@@ -57,6 +57,22 @@ class ServicesTests(TestCase):
         self.assertTrue(isinstance(employee_list, list))
         self.assertTrue(isinstance(employee_list[0], tuple))
         self.assertEqual(len(employee_list[0]), 2)
+
+    @patch('timecardsite.services.next')
+    def test_get_employee_ids_names_emails(self, mocked_next):
+        with open('timecardsite/tests/employee_test_file.json') as jf:
+            test_employee_info = json.load(jf)[1]
+
+        mocked_next.return_value = test_employee_info
+
+        employee_list = services.get_employee_ids_names_and_emails(generate_random_account())
+
+        self.assertTrue(isinstance(employee_list, list))
+        self.assertTrue(isinstance(employee_list[0], dict))
+        self.assertEqual(len(employee_list), 10)
+        self.assertEqual(employee_list[1]['email'], None)
+
+
 
     @patch('timecardsite.services.Plaw.employee_hours')
     def test_get_shifts_and_totals_for_given_employee_correctly_calls_api(self, mocked_employee_hours):

@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card border-primary mt-5">
+                <div class="card-body">
+                    <h3 class="card-title">Invite Employees</h3>
+                    <form method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-success">Invite Selected &raquo;</button>
+                        <table class="table table-hover record_table mt-2">
+                            <thead>
+                                <tr>
+                                    <th scope="col"></th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Email</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for employee in invitable %}
+                                    <tr>
+                                        <td><input type="checkbox" id="employee1" name="invites" value="{{ employee.id }},{{ employee.name }},{{ employee.email }}"></td>
+                                        <td class="align-middle">{{ employee.name }}</td>
+                                        <td class="align-middle">{{ employee.email }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-success mt-5">
+                <div class="card-body">
+                    <h3 class="card-title">Accepted</h3>
+                    <table class="table table-success mt-2">
+                            <tbody>
+                                {% for employee in accepted_invite %}
+                                    <tr>
+                                        <td>{{ employee }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                </div>
+            </div>
+            <div class="card text-white bg-warning mt-2">
+                <div class="card-body">
+                    <h3 class="card-title">Pending</h3>
+                    <table class="table table-warning mt-2">
+                            <tbody>
+                                {% for employee in pending_invite %}
+                                    <tr>
+                                        <td>{{ employee.name }}</td>
+                                        <td>{{ employee.created }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                </div>
+            </div>
+            <div class="card text-white bg-secondary mt-2">
+                <div class="card-body">
+                    <h3 class="card-title">Missing Email</h3>
+                    <p class="card-text">To invite an employee from this list, enter at least one email into Lightspeed and refresh the page.</p>
+                    <table class="table table-secondary mt-2">
+                        <tbody>
+                            {% for employee in missing_email %}
+                                <tr>
+                                    <td>{{ employee }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block extra_script %}
+<script type="text/javascript">
+
+$(document).ready(function() {
+  $('.record_table tr').click(function(event) {
+    if (event.target.type !== 'checkbox') {
+      $(':checkbox', this).trigger('click');
+    }
+  });
+});
+
+$(document).ready(function() {
+    $("input[type='checkbox']").change(function (e) {
+        if ($(this).is(":checked")) { //If the checkbox is checked
+            $(this).closest('tr').addClass("table-active");
+            //Add class on checkbox checked
+        } else {
+            $(this).closest('tr').removeClass("table-active");
+            //Remove class on checkbox uncheck
+        }
+    });
+});
+
+</script>
+{% endblock %}

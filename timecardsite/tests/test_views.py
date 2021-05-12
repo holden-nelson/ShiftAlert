@@ -3,8 +3,10 @@ from unittest.mock import patch
 from django.shortcuts import reverse
 from django.contrib.auth import get_user_model
 
+from invitations.utils import get_invitation_model
+
 from timecardsite.tests import generate_random_token
-from timecardsite.models import Account, Profile
+from timecardsite.models import Account, Profile, InvitationMeta
 
 class ViewsTests(TestCase):
 
@@ -243,6 +245,48 @@ class ViewsTests(TestCase):
         response = self.client.post('/name/')
 
         self.assertRedirects(response, reverse('dashboard'))
+
+    def test_invite_view_redirects_on_post(self):
+        self.client.login(email='manager@user.com', password='managerpassword')
+
+        response = self.client.post('/invite/',
+                                    data={'invites': '67,Test User,test@user.com'})
+
+        self.assertRedirects(response, '/invite/', fetch_redirect_response=False)
+
+    def test_invite_view_saves_invite_to_db(self):
+        self.client.login(email='manager@user.com', password='managerpassword')
+
+        response = self.client.post('/invite/',
+                                    data={'invites': '67,Test User,test@user.com'})
+
+        Invitation = get_invitation_model()
+        self.assertEqual(Invitation.objects.count(), 1)
+        self.assertEqual(Invitation.objects.first().email, 'test@user.com')
+
+    def test_invite_view_saves_invite_meta_to_db(self):
+        self.client.login(email='manager@user.com', password='managerpassword')
+
+        response = self.client.post('/invite/',
+                                    data={'invites': '67,Test User,test@user.com'})
+
+        self.assertEqual(InvitationMeta.objects.count(), 1)
+        self.assertEqual(InvitationMeta.objects.first().invite, get_invitation_model().objects.first())
+        self.assertEqual(InvitationMeta.objects.first().employee_id, '67')
+        self.assertEqual(InvitationMeta.objects.first().name, 'Test User')
+
+    def test_invite_view_creates_multiple_invites_if_necessary(self):
+        self.client.login(email='manager@user.com', password='managerpassword')
+
+        response = self.client.post('/invite/', data={'invites': [
+                                        '67,Test User,test@user.com',
+                                        '73,Another User,another@user.com'
+                                        ]})
+
+        self.assertEqual(get_invitation_model().objects.count(), 2)
+        self.assertEqual(InvitationMeta.objects.count(), 2)
+
+
 
 
 

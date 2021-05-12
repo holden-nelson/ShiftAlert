@@ -148,6 +148,93 @@ Lets' think about these views
         Call an account function that returns a list of dicts with all the necessary info
         pass that on to the template
 
+    invite
+    the purpose is to allow a manager to invite other users, either as employees
+    or managers
+    also to see whose accepted invites, been invited, not invited, and no email
+    Here's what it does:
+        Get new invitation object model
+
+        if the request is a POST
+            get the id, name, and email from post request
+            create and send an invitation
+            store meta information about the invite
+                invite object
+                employee_id of invitee
+                name of invitee
+                above two likely used for profile creation on other side
+                redirect to invite page
+        else if the request is not a POST
+            get a list of employees in the form
+                {
+                    employee_id: {
+                        name: name,
+                        email: email
+                    },
+                    ...
+                }
+            create empty lists for invitable, missing_email,
+                pending_invite, accepted_invite
+            for each employee
+                if the employee is the one logged in, remove them
+                if there is no email
+                    put in missing email list
+                else
+                    try to get the invite corresponding to that employee
+                        if the invite has been accepted add them to the invite accepted list
+                        if not add them to the pending list
+                    if there is no invite
+                        add them to the able to be invited list
+            pass all the lists to the template
+    Here's what it should do:
+        If the request is a POST
+
+        else if not a POST
+            get a list of all employees who have emails from service function
+                should be in the form
+                    [
+                        {
+                            'id': id,
+                            'name': name,
+                            'email': email
+                        },
+                        ...
+                    ]
+            get a list of all employees who don't have emails from service function
+                should be in form [name, name, name, ...]
+            make empty lists for invitable, pending invite, and accepted
+            for each employee in the has-email list
+                attempt to get the invite pertaining to that employee
+                    if the invite has been accepted
+                        append employee name to accepted list
+                    if the invite has not been accepted
+                        get created timestamp from invite
+                        convert to just date - no time needed
+                        add employee to pending list in the form
+                            [
+                                {
+                                    'name': name,
+                                    'created': created
+                                },
+                                ...
+                            ]
+                if the employee does not have an associated invite
+                    add them to the invitable list
+            render template and pass each list in, including no email list
+        General thoughts:
+            have to figure out how POST request will work when it comes to
+                a dynamic number of checkboxes
+                submitting multiple invites to send_invite... something about JSON?
+                I have to double check my signal logic is good to go
+
+
+
+
+
+
+
+
+
 My predicament
 I can't "attach" an api object to an account model the way I thought I could.
 My thinking is that I can create a Service class that does all of the stuff I want the

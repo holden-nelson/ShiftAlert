@@ -1,11 +1,13 @@
 from django.http import Http404, HttpResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, reverse
 from django.utils import timezone
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 
+from invitations.utils import get_invitation_model
+
 from timecardsite import services
-from timecardsite.models import Account, Profile
+from timecardsite.models import Account, Profile, InvitationMeta
 from timecardsite.forms import OnboardingForm, NameForm
 
 @login_required()
@@ -107,6 +109,68 @@ def name(request):
 
         return render(request, 'name.html', {'form': form})
 
+def invite(request):
+    if request.POST:
+        for employee in request.POST.getlist('invites'):
+            # separate out id name and email
+            id, name, email = employee.split(',')
+
+            # create an invitation and send it
+            invite = get_invitation_model().create(email, inviter=request.user)
+            invite.send_invitation(request)
+
+            # store and save meta information regarding the invite
+            InvitationMeta.objects.create(
+                invite=invite,
+                employee_id=id,
+                name=name
+            ).save()
+
+        # todo invite successful message
+        return redirect('invite')
+    else:
+        timezone.activate(request.user.profile.account.timezone)
+
+        employees = services.get_employee_ids_names_and_emails(
+            request.user.profile.account)
+
+        invitable = []
+        missing_email = []
+        pending_invite = []
+        accepted_invite = []
+
+        for employee in employees:
+            # skip the logged in employee
+            if employee['id'] == request.user.profile.employee_id:
+                pass
+
+            elif not employee['email']:
+                missing_email.append(employee['name'])
+
+            else:
+                # check for invites
+                try:
+                    employee_invite = get_invitation_model().objects.get(email=employee['email'])
+                    if employee_invite.accepted:
+                        accepted_invite.append(employee['name'])
+                    else:
+                        # TODO make created just a date instead of timestamp
+                        pending_invite.append({
+                            'name': employee['name'],
+                            'created': employee_invite.created
+                        })
+
+                except get_invitation_model().DoesNotExist:
+                    # employee has not been invited
+                    invitable.append(employee)
+
+        return render(request, 'invite.html', {
+            'invitable': invitable,
+            'missing_email': missing_email,
+            'pending_invite': pending_invite,
+            'accepted_invite': accepted_invite
+        })
+
 @login_required()
 def timecard(request):
     timezone.activate(request.user.profile.account.timezone)
@@ -127,7 +191,6 @@ def timecard(request):
             request.user.profile.employee_id
         )
 
-    # TODO take the context from data and pass it to template
     return render(request, 'timecard.html', employee_shift_data)
 
 def dashboard(request):
