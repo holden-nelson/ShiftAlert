@@ -157,11 +157,11 @@ class ViewsTests(TestCase):
 
         self.assertRedirects(response, reverse('onboard'), fetch_redirect_response=False)
 
-    def test_post_login_view_redirects_to_dashboard_view_for_manager(self):
+    def test_post_login_view_redirects_to_aggregate_view_for_manager(self):
         self.client.login(email='manager@user.com', password='managerpassword')
         response = self.client.get(reverse('post_login'))
 
-        self.assertRedirects(response, reverse('dashboard'))
+        self.assertRedirects(response, reverse('aggregate'))
 
     def test_post_login_view_redirects_to_connect_view_for_unconnected_user(self):
         self.client.login(email='unauthed@user.com', password='unauthedpassword')
@@ -189,7 +189,7 @@ class ViewsTests(TestCase):
         self.assertEqual(response.wsgi_request.user.profile.name, name)
 
     @patch('timecardsite.views.OnboardingForm')
-    def test_onboarding_view_redirects_to_manager_dashboard_on_valid_form_submission(self, mocked_form):
+    def test_onboarding_view_redirects_to_manager_aggregate_on_valid_form_submission(self, mocked_form):
         test_cleaned_data = {
             'timezone': 'America/Boise',
             'employees': '11,Joe Manager',
@@ -201,7 +201,7 @@ class ViewsTests(TestCase):
         self.client.login(email='manager@user.com', password='managerpassword')
         response = self.client.post('/onboard/')
 
-        self.assertRedirects(response, reverse('dashboard'))
+        self.assertRedirects(response, reverse('aggregate'))
 
     @patch('timecardsite.views.OnboardingForm')
     def test_onboarding_view_redirects_to_name_view_on_non_employee_selection(self, mocked_form):
@@ -233,7 +233,7 @@ class ViewsTests(TestCase):
         self.assertEqual(response.wsgi_request.user.profile.name, test_cleaned_data['name'])
 
     @patch('timecardsite.views.NameForm')
-    def test_name_view_redirects_to_dashboard_view(self, mocked_form):
+    def test_name_view_redirects_to_aggregate_view(self, mocked_form):
         test_cleaned_data = {
             'name': 'Joe Administrator'
         }
@@ -244,7 +244,7 @@ class ViewsTests(TestCase):
         self.client.login(email='manager@user.com', password='managerpassword')
         response = self.client.post('/name/')
 
-        self.assertRedirects(response, reverse('dashboard'))
+        self.assertRedirects(response, reverse('aggregate'))
 
     def test_invite_view_redirects_on_post(self):
         self.client.login(email='manager@user.com', password='managerpassword')
@@ -285,6 +285,9 @@ class ViewsTests(TestCase):
 
         self.assertEqual(get_invitation_model().objects.count(), 2)
         self.assertEqual(InvitationMeta.objects.count(), 2)
+
+
+
 
 
 

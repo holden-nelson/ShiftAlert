@@ -31,6 +31,7 @@ class Profile(models.Model):
                             default='emp', blank=False)
     employee_id = models.CharField(max_length=8, default='', blank=True)
     name = models.CharField(max_length=64, default='', blank=True)
+    is_custom = models.BooleanField(default=False)
 
     @property
     def is_manager(self):

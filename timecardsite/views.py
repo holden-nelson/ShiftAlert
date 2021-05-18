@@ -1,3 +1,5 @@
+from datetime import date
+
 from django.http import Http404, HttpResponse
 from django.shortcuts import redirect, render, reverse
 from django.utils import timezone
@@ -46,7 +48,7 @@ def post_login(request):
     if the user is an employee it should redirect to timecard view
     if the user is a manager
         and has not been onboarded it should redirect to onboard view
-        and has been onboarded it should redirect to dashboard view
+        and has been onboarded it should redirect to aggregate view
     '''
     try:
         request.user.profile
@@ -55,7 +57,7 @@ def post_login(request):
 
     if request.user.profile.role == 'mgr':
         if request.user.profile.account.is_onboarded:
-            return redirect('dashboard')
+            return redirect('aggregate')
         else:
             return redirect('onboard')
     else:
@@ -91,7 +93,7 @@ def onboard(request):
             if id == '00':
                 return redirect('name')
             else:
-                return redirect('dashboard')
+                return redirect('aggregate')
     else:
         form = OnboardingForm(account=request.user.profile.account)
 
@@ -103,7 +105,7 @@ def name(request):
         if form.is_valid():
             request.user.profile.name = form.cleaned_data['name']
             request.user.profile.save()
-            return redirect('dashboard')
+            return redirect('aggregate')
     else:
         form = NameForm()
 
@@ -140,29 +142,30 @@ def invite(request):
         accepted_invite = []
 
         for employee in employees:
-            # skip the logged in employee
-            if employee['id'] == request.user.profile.employee_id:
-                pass
+            # skip the logged in employeeaq
+            if not Profile.objects.filter(employee_id=employee['id'], is_custom=True).exists():
+                if employee['id'] == request.user.profile.employee_id:
+                    pass
 
-            elif not employee['email']:
-                missing_email.append(employee['name'])
+                elif not employee['email']:
+                    missing_email.append(employee['name'])
 
-            else:
-                # check for invites
-                try:
-                    employee_invite = get_invitation_model().objects.get(email=employee['email'])
-                    if employee_invite.accepted:
-                        accepted_invite.append(employee['name'])
-                    else:
-                        # TODO make created just a date instead of timestamp
-                        pending_invite.append({
-                            'name': employee['name'],
-                            'created': employee_invite.created
-                        })
+                else:
+                    # check for invites
+                    try:
+                        employee_invite = get_invitation_model().objects.get(email=employee['email'])
+                        if employee_invite.accepted:
+                            accepted_invite.append(employee['name'])
+                        else:
+                            # TODO make created just a date instead of timestamp
+                            pending_invite.append({
+                                'name': employee['name'],
+                                'created': employee_invite.created
+                            })
 
-                except get_invitation_model().DoesNotExist:
-                    # employee has not been invited
-                    invitable.append(employee)
+                    except get_invitation_model().DoesNotExist:
+                        # employee has not been invited
+                        invitable.append(employee)
 
         return render(request, 'invite.html', {
             'invitable': invitable,
@@ -176,8 +179,8 @@ def timecard(request):
     timezone.activate(request.user.profile.account.timezone)
 
     if request.GET:
-        start = request.GET.get('start')
-        end = request.GET.get('end')
+        start = date.fromisoformat(request.GET.get('start'))
+        end = date.fromisoformat(request.GET.get('end'))
 
         employee_shift_data = services.get_shifts_and_totals_for_given_employee(
             request.user.profile.account,
@@ -193,5 +196,21 @@ def timecard(request):
 
     return render(request, 'timecard.html', employee_shift_data)
 
-def dashboard(request):
-    return HttpResponse()
+def aggregate(request):
+    timezone.activate(request.user.profile.account.timezone)
+
+    if request.GET:
+        start = date.fromisoformat(request.GET.get('start'))
+        end = date.fromisoformat(request.GET.get('end'))
+
+        employee_shift_data = services.get_shifts_and_totals(
+            request.user.profile.account,
+            start_date=start,
+            end_date=end
+        )
+    else:
+        employee_shift_data = services.get_shifts_and_totals(
+            request.user.profile.account,
+        )
+
+    return render(request, 'aggregate.html', employee_shift_data)

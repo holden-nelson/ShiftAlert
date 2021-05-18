@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card bg-light mt-5">
+                <div class="card-header">
+                    <h3>{{ user.profile.account.name }}'s Punch Log</h3>
+                    <form method="get">
+                        <div class="input-group">
+                            {% if request.GET %}
+                            <input class="form-control" type="date" name="start" value="{{ request.GET.start }}">
+                            {% else %}
+                            <input class="form-control" type="date" name="start">
+                            {% endif %}
+                            <span class="input-group-text"> - </span>
+                            {% if request.GET %}
+                            <input class="form-control" type="date" name="end" value="{{ request.GET.end }}">
+                            {% else %}
+                            <input class="form-control" type="date" name="end">
+                            {% endif %}
+
+                            <button class="btn btn-success" type="submit">Submit &raquo;</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Clock In</th>
+                            <th scope="col">Clock Out</th>
+                            <th scope="col">Hours</th>
+                        </tr>
+                        {% for day, shops in days.items %}
+                            <tr class="table-primary">
+                                <td colspan="4">{{ day }}</td>
+                            </tr>
+                            {% for shop, shifts in shops.items %}
+                                <tr class="table-secondary">
+                                    <td colspan="4">{{ shop }}</td>
+                                </tr>
+                                {% for shift in shifts %}
+                                    <tr>
+                                        <td>{{ shift.name }}</td>
+                                        <td>{{ shift.check_in|date:"D M d g:i A" }}</td>
+                                        <td>{{ shift.check_out|date:"D M d g:i A" }}</td>
+                                        <td>{{ shift.shift_time|floatformat:2 }}</td>
+                                    </tr>
+                                {% endfor %}
+                                {% if forloop.last %}
+                                    <tr>
+                                        <td colspan="4"></td>
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="card text-white bg-primary mt-5">
+                <div class="card-body">
+                    <h3 class="card-title">Total Hours</h3>
+                    <h4 class="card-title">{{ total_hours|floatformat:2 }}</h4>
+                </div>
+            </div>
+            <div class="card text-white bg-success mt-3">
+                <div class="card-body">
+                    <h3 class="card-title">Totals by Shop</h3>
+                    {% for shop, hours in shop_totals.items %}
+                        <p class="card-text">{{ shop }}: {{ hours|floatformat:2 }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="card text-white bg-info mt-3">
+                <div class="card-body">
+                    <h3 class="card-title">Totals by Employee</h3>
+                    {% for employee, hours in employee_totals.items %}
+                        <p class="card-text">{{ employee }}: {{ hours|floatformat:2 }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

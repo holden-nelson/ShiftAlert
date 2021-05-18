@@ -73,9 +73,9 @@ class ServicesTests(TestCase):
         self.assertEqual(employee_list[1]['email'], None)
 
 
-
+    @patch('timecardsite.services.map_shop_ids_to_names')
     @patch('timecardsite.services.Plaw.employee_hours')
-    def test_get_shifts_and_totals_for_given_employee_correctly_calls_api(self, mocked_employee_hours):
+    def test_get_shifts_and_totals_for_given_employee_correctly_calls_api(self, mocked_employee_hours, mocked_map):
         services.get_shifts_and_totals_for_given_employee(
             generate_random_account(),
             '63',
@@ -102,9 +102,9 @@ class ServicesTests(TestCase):
 
         mocked_employee_hours.assert_called_with(expected_params)
 
-    @patch('timecardsite.services.next')
+    @patch('timecardsite.services.map_shop_ids_to_names')
     @patch('timecardsite.services.Plaw.employee_hours')
-    def test_get_shifts_and_totals_for_given_employee_converts_api_response_to_shifts_and_totals(self, mocked_employee_hours, mocked_next):
+    def test_get_shifts_and_totals_for_given_employee_converts_api_response_to_shifts_and_totals(self, mocked_employee_hours, mocked_map):
         self.maxDiff = None
 
         with open('timecardsite/tests/employee_hours_test_file.json') as jf:
@@ -112,10 +112,10 @@ class ServicesTests(TestCase):
 
         mocked_employee_hours.return_value = iter([test_api_response])
 
-        mocked_next.return_value = {
-            'Shop': {
-                'name': 'The Wildflower-Ketchum'
-            }
+        mocked_map.return_value = {
+            '1': 'The Wildflower-Hailey',
+            '2': 'The Wildflower-Ketchum',
+            '9': 'Inventory Compiler'
         }
 
         timecard = services.get_shifts_and_totals_for_given_employee(
@@ -142,5 +142,32 @@ class ServicesTests(TestCase):
 
         self.assertEqual(timecard, expected_response)
 
+    @patch('timecardsite.services.map_employee_ids_to_names')
+    @patch('timecardsite.services.map_shop_ids_to_names')
+    @patch('timecardsite.services.Plaw.employee_hours')
+    def test_get_shifts_and_totals_correctly_calls_api(self, mocked_employee_hours, mocked_map, mocked_employee):
+        services.get_shifts_and_totals(
+            generate_random_account(),
+            start_date=(date.today() - timedelta(weeks=1)),
+            end_date=date.today()
+        )
+
+        expected_start = datetime.combine(
+            date.today() - timedelta(weeks=1),
+            datetime.min.time()
+        )
+        expected_end = datetime.combine(
+            date.today(), datetime.max.time()
+        )
+        expected_start = pytz.timezone('America/Boise').localize(expected_start, is_dst=None)
+        expected_end = pytz.timezone('America/Boise').localize(expected_end, is_dst=None)
+
+        expected_params = {
+            'checkIn': ['><', expected_start, expected_end],
+            'orderby': 'employeeHoursID',
+            'orderby_desc': '1',
+        }
+
+        mocked_employee_hours.assert_called_with(expected_params)
 
 

@@ -23,15 +23,30 @@
     </button>
 
     <div class="collapse navbar-collapse">
+        <a class="navbar-brand" href="#">{{ user.profile.account.name }}</a>
         <ul class="navbar-nav ml-auto mr-5">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ user.profile.name }}</a>
-              <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Preferences</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a>
-              </div>
-            </li>
+            {% if user.profile.is_manager %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'aggregate' %}">Punch Log</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'invite' %}">Invites</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'timecard' %}">My Timecard</a>
+                </li>
+            {% endif %}
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ user.profile.name }}</a>
+                  <div class="dropdown-menu">
+                    {% if user.profile.is_manager %}
+                        <a class="dropdown-item" href="#">Preferences</a>
+                        <div class="dropdown-divider"></div>
+                    {% endif %}
+                    <a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a>
+                  </div>
+                </li>
         </ul>
     </div>
   </div>

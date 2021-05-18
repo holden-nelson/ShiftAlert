@@ -27,7 +27,7 @@ urlpatterns = [
 
     path('timecard/', views.timecard, name='timecard'),
 
-    path('dashboard/', views.dashboard, name='dashboard'),
+    path('aggregate/', views.aggregate, name='aggregate'),
     path('invite/', views.invite, name='invite'),
 
     re_path(r'^invitations/', include('invitations.urls', namespace='invitations')),
