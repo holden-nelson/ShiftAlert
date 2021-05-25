@@ -4,13 +4,18 @@ from django.http import Http404, HttpResponse
 from django.shortcuts import redirect, render, reverse
 from django.utils import timezone
 from django.contrib.auth import get_user_model
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 from invitations.utils import get_invitation_model
 
 from timecardsite import services
 from timecardsite.models import Account, Profile, InvitationMeta
 from timecardsite.forms import OnboardingForm, NameForm
+
+### User passes test
+def manager_check(user):
+    return user.profile.is_manager
+###
 
 @login_required()
 def index(request):
@@ -200,6 +205,8 @@ def timecard(request):
 
     return render(request, 'timecard.html', employee_shift_data)
 
+@user_passes_test(manager_check, redirect_field_name=None)
+@login_required()
 def aggregate(request):
     timezone.activate(request.user.profile.account.timezone)
 
@@ -218,3 +225,6 @@ def aggregate(request):
         )
 
     return render(request, 'aggregate.html', employee_shift_data)
+
+def preferences(request):
+    return HttpResponse()
