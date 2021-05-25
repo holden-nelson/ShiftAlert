@@ -37,6 +37,10 @@ class Profile(models.Model):
     def is_manager(self):
         return self.role == 'mgr'
 
+    @property
+    def is_administrator(self):
+        return self.employee_id == '00'
+
 class InvitationMeta(models.Model):
     invite = models.OneToOneField(
         Invitation,

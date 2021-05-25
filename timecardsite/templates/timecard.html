@@ -43,23 +43,25 @@
                                 <td>{{ shift.shop }}</td>
                             </tr>
                         {% endfor %}
-                        <tr class="table-primary">
-                            <td>Total Hours</td>
-                            <td></td>
-                            <td>{{ totals.total|floatformat:2 }}</td>
-                            <td></td>
-                        </tr>
-                        {% for shop, hours in totals.items %}
-                            {% if not forloop.first %}
-                                <tr class="table-primary">
-                                    <td>{{ shop }}</td>
-                                    <td></td>
-                                    <td>{{ hours|floatformat:2 }}</td>
-                                    <td></td>
-                                </tr>
-                            {% endif %}
-                        {% endfor %}
                     </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="card text-white bg-primary mt-5">
+                <div class="card-body">
+                    <h3 class="card-title">Total Hours</h3>
+                    <h4 class="card-title">{{ totals.total|floatformat:2 }}</h4>
+                </div>
+            </div>
+            <div class="card text-white bg-success mt-3">
+                <div class="card-body">
+                    <h3 class="card-title">Totals by Shop</h3>
+                    {% for shop, hours in totals.items %}
+                        {% if not forloop.first %}
+                            <p class="card-text">{{ shop }}: {{ hours|floatformat:2 }}</p>
+                        {% endif %}
+                    {% endfor %}
                 </div>
             </div>
         </div>

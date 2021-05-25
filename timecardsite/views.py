@@ -14,7 +14,7 @@ from timecardsite.forms import OnboardingForm, NameForm
 
 @login_required()
 def index(request):
-    return render(request, 'index.html')
+    return redirect('post_login')
 
 def auth(request):
     '''
@@ -142,9 +142,13 @@ def invite(request):
         accepted_invite = []
 
         for employee in employees:
-            # skip the logged in employeeaq
+            # skip the logged in employee
             if not Profile.objects.filter(employee_id=employee['id'], is_custom=True).exists():
                 if employee['id'] == request.user.profile.employee_id:
+                    pass
+
+                elif Profile.objects.filter(employee_id=employee['id']).exists() and \
+                        Profile.objects.get(employee_id=employee['id']).is_manager:
                     pass
 
                 elif not employee['email']:

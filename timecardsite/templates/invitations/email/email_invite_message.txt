@@ -1,0 +1,8 @@
+Hello,
+
+You ({{ email }}) have been invited to join {{ site_name }}.
+
+If you'd like to join, please go to {{ invite_url }} and register a new account.
+
+Thanks,
+ShiftAlert

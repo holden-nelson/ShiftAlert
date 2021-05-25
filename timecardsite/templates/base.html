@@ -33,9 +33,11 @@
                     <a class="nav-link" href="{% url 'invite' %}">Invites</a>
                 </li>
             {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'timecard' %}">My Timecard</a>
-                </li>
+                {% if not user.profile.is_administrator %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'timecard' %}">My Timecard</a>
+                    </li>
+                {% endif %}
             {% endif %}
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ user.profile.name }}</a>
