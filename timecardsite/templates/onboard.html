@@ -23,6 +23,11 @@
                         <p>{% render_field form.timezone class="form-control" %}</p>
                         <p>Which of the following employees are you?</p>
                         <p>{% render_field form.employees class="form-control" %}</p>
+                        <p>On which frequency are your pay periods?</p>
+                        <p>{% render_field form.pay_periods class="form-control" %}</p>
+                        <p>Select the date your <b>current</b> pay period began:</p>
+                        <p>{% render_field form.reference_date class="form-control" type="date" %}</p>
+
                         <button type="submit" class="btn btn-success btn-block">Submit &raquo;</button>
                     </form>
                 </div>

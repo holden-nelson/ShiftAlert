@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load widget_tweaks %}
+
 {% block content %}
 <div class="container-fluid">
     <div class="row justify-content-center">
@@ -9,19 +11,11 @@
                     <h3>{{ user.profile.name }}'s Timecard</h3>
                     <form method="get">
                         <div class="input-group">
-                            {% if request.GET %}
-                            <input class="form-control" type="date" name="start" value="{{ request.GET.start }}">
-                            {% else %}
-                            <input class="form-control" type="date" name="start">
-                            {% endif %}
+                            {% render_field form.range class="form-control mr-2" id="range_selection" %}
+                            {% render_field form.start_date class="form-control" type="date" id="start_date" value=start disabled="" %}
                             <span class="input-group-text"> - </span>
-                            {% if request.GET %}
-                            <input class="form-control" type="date" name="end" value="{{ request.GET.end }}">
-                            {% else %}
-                            <input class="form-control" type="date" name="end">
-                            {% endif %}
-
-                            <button class="btn btn-success" type="submit">Submit &raquo;</button>
+                            {% render_field form.end_date class="form-control" type="date" id="end_date" value=end disabled="" %}
+                            <button class="btn btn-success ml-2" type="submit">Submit &raquo;</button>
                         </div>
                     </form>
                 </div>
@@ -67,4 +61,33 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block extra_script %}
+<script type="text/javascript">
+
+$(document).ready(function() {
+    var range = $('#range_selection').val();
+    if(range == 'custom') {
+        $('#start_date').attr('disabled', false);
+        $('#end_date').attr('disabled', false);
+    }
+});
+
+$(document).ready(function() {
+    $('#range_selection').change(function() {
+        var range = $('#range_selection').val();
+        if(range == 'custom') {
+            $('#start_date').attr('disabled', false);
+            $('#end_date').attr('disabled', false);
+        }
+        else {
+            $('#start_date').attr('disabled', true);
+            $('#end_date').attr('disabled', true);
+        }
+    });
+});
+
+
+</script>
 {% endblock %}

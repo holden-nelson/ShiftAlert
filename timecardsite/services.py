@@ -122,29 +122,31 @@ def get_shifts_and_totals_for_given_employee(account, employee_id,
         'orderby_desc': '1', # most recent shifts first
         'employeeID': employee_id
     }):
-        if not isinstance(page['EmployeeHours'], list):
-            page['EmployeeHours'] = [page['EmployeeHours']]
+        num_shifts = int(page['@attributes']['count'])
+        if num_shifts != 0:
+            if not isinstance(page['EmployeeHours'], list):
+                page['EmployeeHours'] = [page['EmployeeHours']]
 
-        for shift in page['EmployeeHours']:
+            for shift in page['EmployeeHours']:
 
-            check_in = datetime.fromisoformat(shift['checkIn'])
-            if 'checkOut' in shift:
-                check_out = datetime.fromisoformat(shift['checkOut'])
-                shift_delta = check_out - check_in
-            else:
-                check_out = None
-                shift_delta = datetime.now(timezone.utc) - check_in
-            shift_time = shift_delta.total_seconds() / 3600
+                check_in = datetime.fromisoformat(shift['checkIn'])
+                if 'checkOut' in shift:
+                    check_out = datetime.fromisoformat(shift['checkOut'])
+                    shift_delta = check_out - check_in
+                else:
+                    check_out = None
+                    shift_delta = datetime.now(timezone.utc) - check_in
+                shift_time = shift_delta.total_seconds() / 3600
 
-            employee_totals['total'] += shift_time
-            employee_totals[shops[shift['shopID']]] += shift_time
+                employee_totals['total'] += shift_time
+                employee_totals[shops[shift['shopID']]] += shift_time
 
-            employee_shifts.append({
-                'check_in': check_in,
-                'check_out': check_out,
-                'shift_time': shift_time,
-                'shop': shops[shift['shopID']]
-            })
+                employee_shifts.append({
+                    'check_in': check_in,
+                    'check_out': check_out,
+                    'shift_time': shift_time,
+                    'shop': shops[shift['shopID']]
+                })
 
     return {
         'shifts': employee_shifts,

@@ -28,7 +28,6 @@ urlpatterns = [
     path('timecard/', views.timecard, name='timecard'),
     path('aggregate/', views.aggregate, name='aggregate'),
     path('invite/', views.invite, name='invite'),
-    path('preferences/', views.preferences, name='preferences'),
 
     re_path(r'^invitations/', include('invitations.urls', namespace='invitations')),
     path('accounts/', include('allauth.urls')),

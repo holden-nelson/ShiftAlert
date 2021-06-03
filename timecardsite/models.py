@@ -13,6 +13,8 @@ class Account(models.Model):
     name = models.CharField(max_length=64)
     timezone = TimeZoneField(choices_display='WITH_GMT_OFFSET',
                              default='America/Boise')
+    pay_period_type = models.CharField(max_length=32, default='biweekly')
+    pay_period_reference_date = models.DateField(null=True)
     is_onboarded = models.BooleanField(default=False)
 
 class Profile(models.Model):

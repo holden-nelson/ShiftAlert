@@ -1,17 +1,23 @@
 from django.test import TestCase
+from django.test.utils import ignore_warnings
 from unittest.mock import patch
 from django.shortcuts import reverse
 from django.contrib.auth import get_user_model
 
 from invitations.utils import get_invitation_model
 
+from datetime import date
+
 from timecardsite.tests import generate_random_token
 from timecardsite.models import Account, Profile, InvitationMeta
+
 
 class ViewsTests(TestCase):
 
     @classmethod
     def setUpTestData(cls):
+        ignore_warnings(message="No directory at", module="whitenoise.base").enable()
+
         # create some user accounts for tests that require users to be a
         # certain level of authenticated
 
@@ -33,6 +39,8 @@ class ViewsTests(TestCase):
             refresh_token=generate_random_token(),
             name='Manager Store for Managers',
             timezone='America/Boise',
+            pay_period_type='biweekly',
+            pay_period_reference_date=date(2021, 5, 29),
             is_onboarded=True
         )
         cls.manager_account.save()
@@ -56,6 +64,8 @@ class ViewsTests(TestCase):
             account_id=generate_random_token(5),
             access_token=generate_random_token(),
             refresh_token=generate_random_token(),
+            pay_period_type='biweekly',
+            pay_period_reference_date=date(2021, 5, 29),
             name='Test Store for Employees'
         )
         cls.employee_account.save()
@@ -161,7 +171,7 @@ class ViewsTests(TestCase):
         self.client.login(email='manager@user.com', password='managerpassword')
         response = self.client.get(reverse('post_login'))
 
-        self.assertRedirects(response, reverse('aggregate'))
+        self.assertRedirects(response, reverse('aggregate'), fetch_redirect_response=False)
 
     def test_post_login_view_redirects_to_connect_view_for_unconnected_user(self):
         self.client.login(email='unauthed@user.com', password='unauthedpassword')
@@ -174,6 +184,8 @@ class ViewsTests(TestCase):
         test_cleaned_data = {
             'timezone': 'America/Boise',
             'employees': '11,Joe Manager',
+            'pay_periods': 'biweekly',
+            'reference_date': '2021-05-29'
         }
 
         mocked_form.return_value.is_valid.return_value = True
@@ -193,6 +205,8 @@ class ViewsTests(TestCase):
         test_cleaned_data = {
             'timezone': 'America/Boise',
             'employees': '11,Joe Manager',
+            'pay_periods': 'biweekly',
+            'reference_date': '2021-05-29'
         }
 
         mocked_form.return_value.is_valid.return_value = True
@@ -201,13 +215,15 @@ class ViewsTests(TestCase):
         self.client.login(email='manager@user.com', password='managerpassword')
         response = self.client.post('/onboard/')
 
-        self.assertRedirects(response, reverse('aggregate'))
+        self.assertRedirects(response, reverse('aggregate'), fetch_redirect_response=False)
 
     @patch('timecardsite.views.OnboardingForm')
     def test_onboarding_view_redirects_to_name_view_on_non_employee_selection(self, mocked_form):
         test_cleaned_data = {
             'timezone': 'America/Boise',
             'employees': '00',
+            'pay_periods': 'biweekly',
+            'reference_date': '2021-05-29'
         }
 
         mocked_form.return_value.is_valid.return_value = True
@@ -244,7 +260,7 @@ class ViewsTests(TestCase):
         self.client.login(email='manager@user.com', password='managerpassword')
         response = self.client.post('/name/')
 
-        self.assertRedirects(response, reverse('aggregate'))
+        self.assertRedirects(response, reverse('aggregate'), fetch_redirect_response=False)
 
     def test_invite_view_redirects_on_post(self):
         self.client.login(email='manager@user.com', password='managerpassword')

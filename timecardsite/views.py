@@ -1,16 +1,19 @@
 from datetime import date
 
 from django.http import Http404, HttpResponse
-from django.shortcuts import redirect, render, reverse
+from django.shortcuts import redirect, render
 from django.utils import timezone
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required, user_passes_test
 
 from invitations.utils import get_invitation_model
 
+from datetime import date
+
 from timecardsite import services
 from timecardsite.models import Account, Profile, InvitationMeta
-from timecardsite.forms import OnboardingForm, NameForm
+from timecardsite.forms import OnboardingForm, NameForm, RangeForm
+from timecardsite.payperiod import BiWeeklyPayPeriod
 
 ### User passes test
 def manager_check(user):
@@ -89,6 +92,9 @@ def onboard(request):
             else:
                 id = form.cleaned_data['employees']
                 request.user.profile.employee_id = id
+
+            request.user.profile.account.pay_period_type = form.cleaned_data['pay_periods']
+            request.user.profile.account.pay_period_reference_date = form.cleaned_data['reference_date']
 
             request.user.profile.account.is_onboarded = True
 
@@ -187,44 +193,79 @@ def invite(request):
 def timecard(request):
     timezone.activate(request.user.profile.account.timezone)
 
+    bwp = BiWeeklyPayPeriod(request.user.profile.account.pay_period_reference_date)
+
     if request.GET:
-        start = date.fromisoformat(request.GET.get('start'))
-        end = date.fromisoformat(request.GET.get('end'))
+        form = RangeForm(request.GET)
+        if form.is_valid():
+            range = form.cleaned_data['range']
 
-        employee_shift_data = services.get_shifts_and_totals_for_given_employee(
-            request.user.profile.account,
-            request.user.profile.employee_id,
-            start_date=start,
-            end_date=end
-        )
+            if range == 'current':
+                (start, end) = bwp.current()
+            elif range == 'previous':
+                (start, end) = bwp.previous()
+            else:
+                # might come back as iso formatted strings instead of date object
+                # use date.fromisoformat() if they do
+                start = form.cleaned_data['start_date']
+                end = form.cleaned_data['end_date']
+
     else:
-        employee_shift_data = services.get_shifts_and_totals_for_given_employee(
-            request.user.profile.account,
-            request.user.profile.employee_id
-        )
+        # do current by default
+        form = RangeForm()
+        range = 'current'
+        (start, end) = bwp.current()
 
-    return render(request, 'timecard.html', employee_shift_data)
+    context = services.get_shifts_and_totals_for_given_employee(
+        request.user.profile.account,
+        request.user.profile.employee_id,
+        start_date=start,
+        end_date=end
+    )
+
+    context['form'] = form
+    context['range'] = range
+    context['start'] = date.isoformat(start)
+    context['end'] = date.isoformat(end)
+
+    return render(request, 'timecard.html', context)
 
 @user_passes_test(manager_check, redirect_field_name=None)
 @login_required()
 def aggregate(request):
     timezone.activate(request.user.profile.account.timezone)
 
+    bwp = BiWeeklyPayPeriod(request.user.profile.account.pay_period_reference_date)
+
     if request.GET:
-        start = date.fromisoformat(request.GET.get('start'))
-        end = date.fromisoformat(request.GET.get('end'))
+        form = RangeForm(request.GET)
+        if form.is_valid():
+            range = form.cleaned_data['range']
 
-        employee_shift_data = services.get_shifts_and_totals(
-            request.user.profile.account,
-            start_date=start,
-            end_date=end
-        )
+            if range == 'current':
+                (start, end) = bwp.current()
+            elif range == 'previous':
+                (start, end) = bwp.previous()
+            else:
+                # might come back as iso formatted strings instead of date object
+                # use date.fromisoformat() if they do
+                start = form.cleaned_data['start_date']
+                end = form.cleaned_data['end_date']
     else:
-        employee_shift_data = services.get_shifts_and_totals(
-            request.user.profile.account,
-        )
+        # do current by default
+        form = RangeForm()
+        range = 'current'
+        (start, end) = bwp.current()
 
-    return render(request, 'aggregate.html', employee_shift_data)
+    context = services.get_shifts_and_totals(
+        request.user.profile.account,
+        start_date=start,
+        end_date=end
+    )
 
-def preferences(request):
-    return HttpResponse()
+    context['form'] = form
+    context['range'] = range
+    context['start'] = date.isoformat(start)
+    context['end'] = date.isoformat(end)
+
+    return render(request, 'aggregate.html', context)
