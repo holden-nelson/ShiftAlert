@@ -1,5 +1,3 @@
-from datetime import date
-
 from django.http import Http404, HttpResponse
 from django.shortcuts import redirect, render
 from django.utils import timezone
@@ -229,6 +227,7 @@ def timecard(request):
     context['end'] = date.isoformat(end)
 
     return render(request, 'timecard.html', context)
+
 
 @user_passes_test(manager_check, redirect_field_name=None)
 @login_required()

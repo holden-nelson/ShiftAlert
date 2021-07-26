@@ -3,16 +3,11 @@ Services for Lightspeed API interatcion
 """
 from collections import defaultdict
 
-import environ
 from datetime import datetime, date, timedelta, timezone
 import pytz
-
 from plaw import Plaw
 
-### Globals
-env = environ.Env()
-CLIENT_ID = env('CLIENT_ID')
-CLIENT_SECRET = env('CLIENT_SECRET')
+from timecardsite.secrets import CLIENT_ID, CLIENT_SECRET
 
 def get_initial_account_data(code):
     api = Plaw(CLIENT_ID, CLIENT_SECRET)

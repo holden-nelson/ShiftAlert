@@ -1,0 +1,11 @@
+[Unit]
+Description=Gunicorn server for SITENAME
+
+[Service]
+Restart=on-failure
+User=dev
+WorkingDirectory=/home/dev/sites/SITENAME/source
+ExecStart=/home/dev/.pyenv/shims/gunicorn --bind unix:/tmp/SITENAME.socket timesheet.wsgi:application
+
+[Install]
+WantedBy=multi-user.target
