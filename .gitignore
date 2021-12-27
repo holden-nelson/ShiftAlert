@@ -8,3 +8,4 @@ database
 .gitignore
 *.env
 *secrets.py
+shiftalert.sublime-*
