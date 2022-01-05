@@ -1,0 +1,25 @@
+{
+    "@attributes": {
+        "count": "2",
+        "offset": "0",
+        "limit": "100"
+    },
+    "Shop": [
+        {
+            "shopID": "1",
+            "name": "Fictional_Shop_1",
+            "timeZone": "US/Mountain",
+            "labelTitle": "Shop Name",
+            "archived": "false",
+            "timeStamp": "2021-01-03T22:06:01+00:00",
+        },
+        {
+            "shopID": "2",
+            "name": "Fictional_Shop_2,
+            "timeZone": "America/Denver",
+            "labelTitle": "No Title",
+            "archived": "false",
+            "timeStamp": "2021-01-12T22:04:53+00:00",
+        }
+    ]
+}

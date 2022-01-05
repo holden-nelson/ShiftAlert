@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from invitations.utils import get_invitation_model
 
 from datetime import date
+import time
 
 from timecardsite import services
 from timecardsite.models import Account, Profile, InvitationMeta
@@ -32,7 +33,7 @@ def auth(request):
 
     if code:
 
-        account_info = services.get_initial_account_data(code)
+        account_info = services.get_account_info(code)
         account = Account(**account_info)
         account.save()
 
@@ -214,9 +215,9 @@ def timecard(request):
         range = 'current'
         (start, end) = bwp.current()
 
-    context = services.get_shifts_and_totals_for_given_employee(
+    context = services.get_punch_log_by_employee(
         request.user.profile.account,
-        request.user.profile.employee_id,
+        employee_id=request.user.profile.employee_id,
         start_date=start,
         end_date=end
     )
@@ -256,7 +257,7 @@ def aggregate(request):
         range = 'current'
         (start, end) = bwp.current()
 
-    context = services.get_shifts_and_totals(
+    context = services.get_punch_log(
         request.user.profile.account,
         start_date=start,
         end_date=end
@@ -268,3 +269,12 @@ def aggregate(request):
     context['end'] = date.isoformat(end)
 
     return render(request, 'aggregate.html', context)
+
+
+
+
+
+
+
+
+

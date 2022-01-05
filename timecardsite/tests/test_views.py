@@ -83,25 +83,25 @@ class ViewsTests(TestCase):
         response = self.client.get('/auth/')
         self.assertEqual(response.status_code, 404)
 
-    @patch('timecardsite.views.services.get_initial_account_data')
-    def test_auth_view_passes_code_to_service_function(self, mocked_initial):
+    @patch('timecardsite.views.services.get_account_info')
+    def test_auth_view_passes_code_to_service_function(self, mocked_account_info):
         code = generate_random_token()
         user_id = get_user_model().objects.get(email='unauthed@user.com').id
 
         self.client.login(email='unauthed@user.com', password='unauthedpassword')
         self.client.get(f'/auth/?code={code}&state={user_id}')
 
-        mocked_initial.assert_called_with(code)
+        mocked_account_info.assert_called_with(code)
 
-    @patch('timecardsite.views.services.get_initial_account_data')
-    def test_auth_view_creates_new_account_object(self, mocked_initial):
+    @patch('timecardsite.views.services.get_account_info')
+    def test_auth_view_creates_new_account_object(self, mocked_account_info):
         test_initial = {
             'access_token': generate_random_token(),
             'refresh_token': generate_random_token(),
             'account_id': generate_random_token(5),
             'name': 'Test Store for Testing'
         }
-        mocked_initial.return_value = test_initial
+        mocked_account_info.return_value = test_initial
 
         user_id = get_user_model().objects.get(email='unauthed@user.com').id
 
@@ -114,15 +114,15 @@ class ViewsTests(TestCase):
         self.assertEqual(new_account.access_token, test_initial['access_token'])
         self.assertEqual(new_account.refresh_token, test_initial['refresh_token'])
 
-    @patch('timecardsite.views.services.get_initial_account_data')
-    def test_auth_view_creates_new_manager_profile(self, mocked_initial):
+    @patch('timecardsite.views.services.get_account_info')
+    def test_auth_view_creates_new_manager_profile(self, mocked_account_info):
         test_initial = {
             'access_token': generate_random_token(),
             'refresh_token': generate_random_token(),
             'account_id': generate_random_token(5),
             'name': 'Test Store for Testing'
         }
-        mocked_initial.return_value = test_initial
+        mocked_account_info.return_value = test_initial
 
         user_id = get_user_model().objects.get(email='unauthed@user.com').id
 
@@ -134,8 +134,8 @@ class ViewsTests(TestCase):
         self.assertEqual(new_profile.role, 'mgr')
 
 
-    @patch('timecardsite.views.services.get_initial_account_data')
-    def test_auth_view_redirects_to_post_login(self, mocked_initial):
+    @patch('timecardsite.views.services.get_account_info')
+    def test_auth_view_redirects_to_post_login(self, mocked_account_info):
         user_id = get_user_model().objects.get(email='unauthed@user.com').id
 
         self.client.login(email='unauthed@user.com', password='unauthedpassword')
@@ -149,15 +149,15 @@ class ViewsTests(TestCase):
 
         self.assertRedirects(response, reverse('timecard'), fetch_redirect_response=False)
 
-    @patch('timecardsite.views.services.get_initial_account_data')
-    def test_post_login_redirects_to_onboard_view_for_new_user(self, mocked_initial):
+    @patch('timecardsite.views.services.get_account_info')
+    def test_post_login_redirects_to_onboard_view_for_new_user(self, mocked_account_info):
         test_initial = {
             'access_token': generate_random_token(),
             'refresh_token': generate_random_token(),
             'account_id': generate_random_token(5),
             'name': 'Test Store for Testing'
         }
-        mocked_initial.return_value = test_initial
+        mocked_account_info.return_value = test_initial
 
         user_id = get_user_model().objects.get(email='unauthed@user.com').id
 
@@ -301,7 +301,6 @@ class ViewsTests(TestCase):
 
         self.assertEqual(get_invitation_model().objects.count(), 2)
         self.assertEqual(InvitationMeta.objects.count(), 2)
-
 
 
 

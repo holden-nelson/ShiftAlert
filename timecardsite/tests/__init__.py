@@ -1,5 +1,7 @@
 import random, string
 
+from datetime import date
+
 from timecardsite.models import Account
 
 def generate_random_token(length=16):
@@ -13,5 +15,7 @@ def generate_random_account():
         refresh_token=generate_random_token(),
         name='Manager Store for Managers',
         timezone='America/Boise',
+        pay_period_type='biweekly',
+        pay_period_reference_date=date(2021, 5, 29),
         is_onboarded=True
     )

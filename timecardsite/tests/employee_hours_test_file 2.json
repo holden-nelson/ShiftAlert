@@ -1,0 +1,709 @@
+{
+    "@attributes": {
+        "count": "4252",
+        "offset": "0",
+        "limit": "100"
+    },
+    "EmployeeHours": [
+        {
+            "employeeHoursID": "2",
+            "checkIn": "2014-02-19T23:08:08+00:00",
+            "checkOut": "2014-02-19T23:08:22+00:00",
+            "employeeID": "4",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "8",
+            "checkIn": "2014-03-01T16:45:49+00:00",
+            "checkOut": "2014-03-02T00:01:18+00:00",
+            "employeeID": "2",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "10",
+            "checkIn": "2014-03-02T16:31:46+00:00",
+            "checkOut": "2014-03-03T00:03:22+00:00",
+            "employeeID": "6",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "12",
+            "checkIn": "2014-03-03T16:58:09+00:00",
+            "checkOut": "2014-03-04T00:02:40+00:00",
+            "employeeID": "1",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "14",
+            "checkIn": "2014-03-04T21:43:18+00:00",
+            "checkOut": "2014-03-05T00:03:43+00:00",
+            "employeeID": "6",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "16",
+            "checkIn": "2014-03-05T16:28:11+00:00",
+            "checkOut": "2014-03-06T00:11:42+00:00",
+            "employeeID": "2",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "18",
+            "checkIn": "2014-03-05T21:49:06+00:00",
+            "checkOut": "2014-03-06T00:12:08+00:00",
+            "employeeID": "6",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "20",
+            "checkIn": "2014-03-06T16:31:14+00:00",
+            "checkOut": "2014-03-07T00:17:26+00:00",
+            "employeeID": "2",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "22",
+            "checkIn": "2014-03-07T16:36:23+00:00",
+            "checkOut": "2014-03-08T00:12:00+00:00",
+            "employeeID": "2",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "24",
+            "checkIn": "2014-03-07T21:41:57+00:00",
+            "checkOut": "2014-03-08T00:11:07+00:00",
+            "employeeID": "6",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "26",
+            "checkIn": "2014-03-08T16:40:00+00:00",
+            "checkOut": "2014-03-09T00:18:29+00:00",
+            "employeeID": "2",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "28",
+            "checkIn": "2014-03-09T15:36:23+00:00",
+            "checkOut": "2014-03-09T23:03:36+00:00",
+            "employeeID": "6",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "30",
+            "checkIn": "2014-03-10T15:40:07+00:00",
+            "checkOut": "2014-03-10T23:11:00+00:00",
+            "employeeID": "2",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "32",
+            "checkIn": "2014-03-11T15:40:06+00:00",
+            "checkOut": "2014-03-11T23:18:00+00:00",
+            "employeeID": "2",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "34",
+            "checkIn": "2014-03-12T15:33:20+00:00",
+            "checkOut": "2014-03-12T16:06:09+00:00",
+            "employeeID": "2",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "36",
+            "checkIn": "2014-03-13T19:46:07+00:00",
+            "checkOut": "2014-03-13T23:11:20+00:00",
+            "employeeID": "6",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "38",
+            "checkIn": "2014-03-14T15:37:52+00:00",
+            "checkOut": "2014-03-14T23:05:25+00:00",
+            "employeeID": "2",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "40",
+            "checkIn": "2014-03-15T15:32:39+00:00",
+            "checkOut": "2014-03-15T23:05:00+00:00",
+            "employeeID": "2",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "42",
+            "checkIn": "2014-03-16T15:39:13+00:00",
+            "checkOut": "2014-03-16T23:06:06+00:00",
+            "employeeID": "6",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "44",
+            "checkIn": "2014-03-17T15:42:48+00:00",
+            "checkOut": "2014-03-17T22:06:15+00:00",
+            "employeeID": "2",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "46",
+            "checkIn": "2014-03-17T20:54:39+00:00",
+            "checkOut": "2014-03-17T23:09:15+00:00",
+            "employeeID": "6",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "48",
+            "checkIn": "2014-03-19T15:34:25+00:00",
+            "checkOut": "2014-03-19T21:50:48+00:00",
+            "employeeID": "2",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "50",
+            "checkIn": "2014-03-19T20:45:00+00:00",
+            "checkOut": "2014-03-19T23:16:53+00:00",
+            "employeeID": "6",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "52",
+            "checkIn": "2014-03-21T15:55:30+00:00",
+            "checkOut": "2014-03-21T20:46:59+00:00",
+            "employeeID": "8",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "54",
+            "checkIn": "2014-03-21T20:40:02+00:00",
+            "checkOut": "2014-03-21T23:14:40+00:00",
+            "employeeID": "6",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "56",
+            "checkIn": "2014-03-22T15:33:36+00:00",
+            "checkOut": "2014-03-22T17:58:02+00:00",
+            "employeeID": "2",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "58",
+            "checkIn": "2014-03-22T17:51:24+00:00",
+            "checkOut": "2014-03-22T23:11:13+00:00",
+            "employeeID": "6",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "59",
+            "checkIn": "2014-03-23T15:40:36+00:00",
+            "checkOut": "2014-03-23T23:07:44+00:00",
+            "employeeID": "6",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "61",
+            "checkIn": "2014-03-24T15:46:02+00:00",
+            "checkOut": "2014-03-24T22:20:00+00:00",
+            "employeeID": "2",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "63",
+            "checkIn": "2014-03-24T20:52:57+00:00",
+            "checkOut": "2014-03-24T23:14:26+00:00",
+            "employeeID": "6",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "65",
+            "checkIn": "2014-03-25T15:35:00+00:00",
+            "checkOut": "2014-03-25T23:00:00+00:00",
+            "employeeID": "2",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "67",
+            "checkIn": "2014-03-26T15:24:35+00:00",
+            "checkOut": "2014-03-27T00:07:20+00:00",
+            "employeeID": "2",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "69",
+            "checkIn": "2014-03-27T16:43:50+00:00",
+            "checkOut": "2014-03-27T21:57:16+00:00",
+            "employeeID": "8",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "71",
+            "checkIn": "2014-03-27T21:57:06+00:00",
+            "checkOut": "2014-03-28T00:08:11+00:00",
+            "employeeID": "6",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "72",
+            "checkIn": "2014-03-28T16:40:32+00:00",
+            "checkOut": "2014-03-28T18:33:25+00:00",
+            "employeeID": "6",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "74",
+            "checkIn": "2014-03-29T16:40:09+00:00",
+            "checkOut": "2014-03-30T00:10:16+00:00",
+            "employeeID": "6",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "76",
+            "checkIn": "2014-03-30T16:43:29+00:00",
+            "checkOut": "2014-03-31T00:00:20+00:00",
+            "employeeID": "6",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "77",
+            "checkIn": "2014-04-01T21:48:51+00:00",
+            "checkOut": "2014-04-02T00:29:41+00:00",
+            "employeeID": "6",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "79",
+            "checkIn": "2014-04-03T16:43:49+00:00",
+            "checkOut": "2014-04-03T21:51:45+00:00",
+            "employeeID": "8",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "81",
+            "checkIn": "2014-04-03T21:51:06+00:00",
+            "checkOut": "2014-04-04T00:08:03+00:00",
+            "employeeID": "6",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "83",
+            "checkIn": "2014-04-04T16:28:45+00:00",
+            "checkOut": "2014-04-05T00:10:00+00:00",
+            "employeeID": "2",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "85",
+            "checkIn": "2014-04-05T16:42:46+00:00",
+            "checkOut": "2014-04-06T00:12:00+00:00",
+            "employeeID": "2",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "87",
+            "checkIn": "2014-04-06T16:43:59+00:00",
+            "checkOut": "2014-04-07T00:02:20+00:00",
+            "employeeID": "6",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "89",
+            "checkIn": "2014-04-07T16:33:31+00:00",
+            "checkOut": "2014-04-08T00:12:27+00:00",
+            "employeeID": "2",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "91",
+            "checkIn": "2014-04-08T16:34:16+00:00",
+            "checkOut": "2014-04-08T22:00:19+00:00",
+            "employeeID": "2",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "93",
+            "checkIn": "2014-04-08T21:50:11+00:00",
+            "checkOut": "2014-04-09T00:06:39+00:00",
+            "employeeID": "6",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "95",
+            "checkIn": "2014-04-10T16:42:02+00:00",
+            "checkOut": "2014-04-10T21:54:12+00:00",
+            "employeeID": "8",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "97",
+            "checkIn": "2014-04-10T21:53:32+00:00",
+            "checkOut": "2014-04-11T00:05:09+00:00",
+            "employeeID": "6",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "99",
+            "checkIn": "2014-04-11T16:37:36+00:00",
+            "checkOut": "2014-04-12T00:11:00+00:00",
+            "employeeID": "2",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "101",
+            "checkIn": "2014-04-12T16:39:23+00:00",
+            "checkOut": "2014-04-13T00:14:35+00:00",
+            "employeeID": "2",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "103",
+            "checkIn": "2014-04-13T16:38:52+00:00",
+            "checkOut": "2014-04-14T00:02:03+00:00",
+            "employeeID": "6",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "105",
+            "checkIn": "2014-04-14T16:41:42+00:00",
+            "checkOut": "2014-04-15T00:30:19+00:00",
+            "employeeID": "2",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "107",
+            "checkIn": "2014-04-15T16:32:22+00:00",
+            "checkOut": "2014-04-15T20:52:07+00:00",
+            "employeeID": "2",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "109",
+            "checkIn": "2014-04-15T20:49:01+00:00",
+            "checkOut": "2014-04-16T00:03:23+00:00",
+            "employeeID": "6",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "110",
+            "checkIn": "2014-04-16T16:42:54+00:00",
+            "checkOut": "2014-04-17T00:15:00+00:00",
+            "employeeID": "2",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "112",
+            "checkIn": "2014-04-17T16:36:00+00:00",
+            "checkOut": "2014-04-18T01:20:00+00:00",
+            "employeeID": "2",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "114",
+            "checkIn": "2014-04-17T21:54:22+00:00",
+            "checkOut": "2014-04-18T01:20:00+00:00",
+            "employeeID": "6",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "116",
+            "checkIn": "2014-04-18T18:03:51+00:00",
+            "checkOut": "2014-04-19T00:00:34+00:00",
+            "employeeID": "2",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "118",
+            "checkIn": "2014-04-19T16:33:40+00:00",
+            "checkOut": "2014-04-20T00:05:08+00:00",
+            "employeeID": "2",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "120",
+            "checkIn": "2014-04-21T16:31:54+00:00",
+            "checkOut": "2014-04-22T00:10:00+00:00",
+            "employeeID": "2",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "122",
+            "checkIn": "2014-04-22T18:11:03+00:00",
+            "checkOut": "2014-04-22T21:57:29+00:00",
+            "employeeID": "2",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "124",
+            "checkIn": "2014-04-22T21:54:15+00:00",
+            "checkOut": "2014-04-23T00:07:33+00:00",
+            "employeeID": "6",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "126",
+            "checkIn": "2014-04-23T16:32:31+00:00",
+            "checkOut": "2014-04-24T00:14:56+00:00",
+            "employeeID": "2",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "128",
+            "checkIn": "2014-04-24T16:45:58+00:00",
+            "checkOut": "2014-04-24T21:50:37+00:00",
+            "employeeID": "8",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "130",
+            "checkIn": "2014-04-24T21:40:09+00:00",
+            "checkOut": "2014-04-25T00:06:45+00:00",
+            "employeeID": "6",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "132",
+            "checkIn": "2014-04-25T16:28:53+00:00",
+            "checkOut": "2014-04-26T00:17:54+00:00",
+            "employeeID": "2",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "134",
+            "checkIn": "2014-04-26T16:38:16+00:00",
+            "checkOut": "2014-04-27T00:15:00+00:00",
+            "employeeID": "2",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "136",
+            "checkIn": "2014-04-27T16:40:55+00:00",
+            "checkOut": "2014-04-28T01:15:00+00:00",
+            "employeeID": "6",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "138",
+            "checkIn": "2014-04-28T21:29:38+00:00",
+            "checkOut": "2014-04-29T00:01:18+00:00",
+            "employeeID": "6",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "140",
+            "checkIn": "2014-04-29T16:36:17+00:00",
+            "checkOut": "2014-04-29T22:01:35+00:00",
+            "employeeID": "2",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "142",
+            "checkIn": "2014-04-29T21:57:09+00:00",
+            "checkOut": "2014-04-30T00:08:17+00:00",
+            "employeeID": "6",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "144",
+            "checkIn": "2014-04-30T16:38:05+00:00",
+            "checkOut": "2014-05-01T00:00:55+00:00",
+            "employeeID": "2",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "146",
+            "checkIn": "2014-05-01T16:38:10+00:00",
+            "checkOut": "2014-05-01T21:46:02+00:00",
+            "employeeID": "8",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "148",
+            "checkIn": "2014-05-01T21:45:33+00:00",
+            "checkOut": "2014-05-02T00:15:00+00:00",
+            "employeeID": "6",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "150",
+            "checkIn": "2014-05-02T16:47:51+00:00",
+            "checkOut": "2014-05-03T00:15:00+00:00",
+            "employeeID": "2",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "152",
+            "checkIn": "2014-05-03T16:31:48+00:00",
+            "checkOut": "2014-05-04T00:23:00+00:00",
+            "employeeID": "2",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "154",
+            "checkIn": "2014-05-04T16:31:51+00:00",
+            "checkOut": "2014-05-05T00:13:12+00:00",
+            "employeeID": "2",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "156",
+            "checkIn": "2014-05-05T22:09:07+00:00",
+            "checkOut": "2014-05-06T00:14:43+00:00",
+            "employeeID": "6",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "157",
+            "checkIn": "2014-05-06T17:00:00+00:00",
+            "checkOut": "2014-05-07T00:00:00+00:00",
+            "employeeID": "2",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "158",
+            "checkIn": "2014-05-07T16:26:59+00:00",
+            "checkOut": "2014-05-08T00:02:21+00:00",
+            "employeeID": "2",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "160",
+            "checkIn": "2014-05-08T16:43:10+00:00",
+            "checkOut": "2014-05-08T21:56:55+00:00",
+            "employeeID": "8",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "162",
+            "checkIn": "2014-05-08T21:57:49+00:00",
+            "checkOut": "2014-05-09T00:09:03+00:00",
+            "employeeID": "6",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "164",
+            "checkIn": "2014-05-09T21:45:32+00:00",
+            "checkOut": "2014-05-10T00:10:33+00:00",
+            "employeeID": "6",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "166",
+            "checkIn": "2014-05-10T16:46:14+00:00",
+            "checkOut": "2014-05-11T00:00:01+00:00",
+            "employeeID": "2",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "168",
+            "checkIn": "2014-05-11T16:44:15+00:00",
+            "checkOut": "2014-05-12T00:10:00+00:00",
+            "employeeID": "2",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "170",
+            "checkIn": "2014-05-12T21:59:20+00:00",
+            "checkOut": "2014-05-13T00:08:53+00:00",
+            "employeeID": "6",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "172",
+            "checkIn": "2014-05-13T16:30:34+00:00",
+            "checkOut": "2014-05-14T00:15:42+00:00",
+            "employeeID": "2",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "174",
+            "checkIn": "2014-05-14T16:33:43+00:00",
+            "checkOut": "2014-05-15T00:02:56+00:00",
+            "employeeID": "2",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "176",
+            "checkIn": "2014-05-15T16:39:10+00:00",
+            "checkOut": "2014-05-15T21:52:41+00:00",
+            "employeeID": "8",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "178",
+            "checkIn": "2014-05-15T21:52:54+00:00",
+            "checkOut": "2014-05-16T00:11:01+00:00",
+            "employeeID": "6",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "180",
+            "checkIn": "2014-05-16T16:25:06+00:00",
+            "checkOut": "2014-05-16T21:52:24+00:00",
+            "employeeID": "2",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "182",
+            "checkIn": "2014-05-16T21:52:13+00:00",
+            "checkOut": "2014-05-17T00:12:29+00:00",
+            "employeeID": "6",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "184",
+            "checkIn": "2014-05-17T16:43:04+00:00",
+            "checkOut": "2014-05-18T00:25:21+00:00",
+            "employeeID": "6",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "186",
+            "checkIn": "2014-05-18T16:48:18+00:00",
+            "checkOut": "2014-05-19T00:10:00+00:00",
+            "employeeID": "6",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "190",
+            "checkIn": "2014-05-19T16:45:00+00:00",
+            "checkOut": "2014-05-19T22:18:26+00:00",
+            "employeeID": "10",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "192",
+            "checkIn": "2014-05-19T21:52:29+00:00",
+            "checkOut": "2014-05-20T00:16:47+00:00",
+            "employeeID": "6",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "194",
+            "checkIn": "2014-05-21T16:27:25+00:00",
+            "checkOut": "2014-05-22T00:06:00+00:00",
+            "employeeID": "2",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "196",
+            "checkIn": "2014-05-22T16:48:19+00:00",
+            "checkOut": "2014-05-22T21:54:25+00:00",
+            "employeeID": "8",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "198",
+            "checkIn": "2014-05-22T21:54:54+00:00",
+            "checkOut": "2014-05-23T00:04:29+00:00",
+            "employeeID": "6",
+            "shopID": "1"
+        },
+        {
+            "employeeHoursID": "200",
+            "checkIn": "2014-05-23T16:45:59+00:00",
+            "checkOut": "2014-05-24T00:09:38+00:00",
+            "employeeID": "2",
+            "shopID": "1"
+        }
+    ]
+}
