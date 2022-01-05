@@ -1,0 +1,49 @@
+{
+    "@attributes": {
+        "count": "2",
+        "offset": "0",
+        "limit": "100"
+    },
+    "Shop": [
+        {
+            "shopID": "1",
+            "name": "The Wildflower-Hailey",
+            "serviceRate": "0",
+            "timeZone": "US/Mountain",
+            "taxLabor": "false",
+            "labelTitle": "Shop Name",
+            "labelMsrp": "false",
+            "archived": "false",
+            "timeStamp": "2021-01-03T22:06:01+00:00",
+            "companyRegistrationNumber": "",
+            "vatNumber": "",
+            "zebraBrowserPrint": "false",
+            "contactID": "4",
+            "taxCategoryID": "2",
+            "receiptSetupID": "1",
+            "ccGatewayID": "4",
+            "gatewayConfigID": "2c3ee5bd-ff2c-4ce1-a7b4-0dcd3662cd82",
+            "priceLevelID": "1"
+        },
+        {
+            "shopID": "2",
+            "name": "The Wildflower-Ketchum",
+            "serviceRate": "0",
+            "timeZone": "America/Denver",
+            "taxLabor": "false",
+            "labelTitle": "No Title",
+            "labelMsrp": "false",
+            "archived": "false",
+            "timeStamp": "2021-01-12T22:04:53+00:00",
+            "companyRegistrationNumber": "",
+            "vatNumber": "",
+            "zebraBrowserPrint": "false",
+            "contactID": "1214",
+            "taxCategoryID": "3",
+            "receiptSetupID": "2",
+            "ccGatewayID": "0",
+            "gatewayConfigID": "54f8edb4-3c5e-4c2a-b137-d31965d17b70",
+            "priceLevelID": "1"
+        }
+    ]
+}

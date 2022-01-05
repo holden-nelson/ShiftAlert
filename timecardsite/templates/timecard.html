@@ -23,6 +23,7 @@
                     <table class="table">
                         <thead>
                             <tr>
+                                <th scope="col">Date</th>
                                 <th scope="col">Clock In</th>
                                 <th scope="col">Clock Out</th>
                                 <th scope="col">Hours</th>
@@ -31,8 +32,9 @@
                         </thead>
                         {% for shift in shifts %}
                             <tr>
-                                <td>{{ shift.check_in|date:"D M d g:i A" }}</td>
-                                <td>{{ shift.check_out|date:"D M d g:i A" }}</td>
+                                <td>{{ shift.check_in|date:"D M d" }}
+                                <td>{{ shift.check_in|date:"g:i A" }}</td>
+                                <td>{{ shift.check_out|date:"g:i A" }}</td>
                                 <td>{{ shift.shift_time|floatformat:2 }}</td>
                                 <td>{{ shift.shop }}</td>
                             </tr>

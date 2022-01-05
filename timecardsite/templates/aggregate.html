@@ -27,7 +27,7 @@
                             <th scope="col">Clock Out</th>
                             <th scope="col">Hours</th>
                         </tr>
-                        {% for day, shops in days.items %}
+                        {% for day, shops in punch_log.items %}
                             <tr class="table-primary">
                                 <td colspan="4">{{ day }}</td>
                             </tr>
@@ -38,8 +38,8 @@
                                 {% for shift in shifts %}
                                     <tr>
                                         <td>{{ shift.name }}</td>
-                                        <td>{{ shift.check_in|date:"D M d g:i A" }}</td>
-                                        <td>{{ shift.check_out|date:"D M d g:i A" }}</td>
+                                        <td>{{ shift.check_in|date:"g:i A" }}</td>
+                                        <td>{{ shift.check_out|date:"g:i A" }}</td>
                                         <td>{{ shift.shift_time|floatformat:2 }}</td>
                                     </tr>
                                 {% endfor %}
