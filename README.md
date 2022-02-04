@@ -4,7 +4,7 @@ Shift Alert is an integration for Lightspeed POS.
 
 It allows you to give your employees access to their timecard without giving them access to the rest of your reports.
 
-This is a very basic Django app that is currently hosted at [shiftalert.co](shiftalert.co). If you're finding this repo and wanting to use the software, feel free to sign up for an account and help me test it out. 
+This is a very basic Django app that is currently hosted at [shiftalert.co](https://shiftalert.co). If you're finding this repo and wanting to use the software, feel free to sign up for an account and help me test it out. 
 
 ## License
 
